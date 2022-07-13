@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {NewSaleForm} from "./SaleForm";
+import {NewSaleForm} from "./sale-form";
 import SellCarFormContext from "../context/SellCarFormContext";
 
 function SellCar() {

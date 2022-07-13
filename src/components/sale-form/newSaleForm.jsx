@@ -9,7 +9,7 @@ import {
     VehicleModel, VehicleRevision,
     VehicleState,
     Year
-} from "./Steps";
+} from "./steps";
 import {ProgressBar} from "primereact/progressbar";
 import {Button} from "primereact/button";
 import React from "react";
@@ -41,14 +41,20 @@ export function NewSaleForm({proceedNext = true}) {
     const nextStep = () => {
         setCurrentStep(currentStep + 1)
     };
+
     // Go backward to the prev step
     const previousStep = () => {
         setCurrentStep(currentStep - 1)
     };
     return (
         <>
-            <ProgressBar showValue={false} value={(currentStep * 100 / componentList.length)}/>
+            <ProgressBar showValue={false} value={(currentStep * 100 / (componentList.length - 1))}/>
 
+            <header className="bg-white shadow">
+                <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+                    <h3 className="text-xl font-bold text-gray-600">Vendé tu auto</h3>
+                </div>
+            </header>
             {/* Stepper
             <ProgressBar currentStep={currentStep} totalNoSteps={componentList.length}/>*/}
             {/* Form body */}
@@ -66,21 +72,17 @@ export function NewSaleForm({proceedNext = true}) {
             />*/}
 
 
-            {currentStep > 0 ?
-                <Button icon="pi pi-angle-left"
-                        className="p-button-rounded p-button-primary"
-                        aria-label="Back"
-                        onClick={() => previousStep()}/>
-                : <></>
-            }
+            <Button icon="pi pi-angle-left"
+                    className="p-button-rounded p-button-primary"
+                    aria-label="Back"
+                    disabled={!(currentStep > 0)}
+                    onClick={() => previousStep()}/>
 
-            {currentStep < componentList.length - 1 ?
-                <Button icon="pi pi-angle-right"
-                        className="p-button-rounded p-button-primary"
-                        aria-label="Next"
-                        onClick={() => nextStep()}/>
-                : <></>
-            }
+            <Button icon="pi pi-angle-right"
+                    className="p-button-rounded p-button-primary"
+                    aria-label="Next"
+                    disabled={!(currentStep < componentList.length - 1)}
+                    onClick={() => nextStep()}/>
 
         </>
     );
