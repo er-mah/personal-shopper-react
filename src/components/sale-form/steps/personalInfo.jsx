@@ -1,5 +1,7 @@
 export function PersonalInfo() {
     return (
-        <>PersonalInfo</>
+        <>
+            <h2>Tus datos de contacto</h2>
+        </>
     );
 }

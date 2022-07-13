@@ -1,5 +1,8 @@
 export function FormCompleted() {
     return (
-        <>FormCompleted</>
+        <>
+
+            <h2>Finalizaste el formulario</h2>
+        </>
     );
 }

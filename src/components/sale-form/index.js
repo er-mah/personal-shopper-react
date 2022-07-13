@@ -1,1 +1,1 @@
-export {NewSaleForm} from "./NewSaleForm";
+export {NewSaleForm} from "./newSaleForm";

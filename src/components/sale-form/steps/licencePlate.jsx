@@ -1,5 +1,7 @@
 export function LicencePlate() {
     return (
-        <>LicencePlate</>
+        <>
+            <h2>La licencia de conducir</h2>
+        </>
     );
 }

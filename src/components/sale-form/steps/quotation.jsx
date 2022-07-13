@@ -1,5 +1,8 @@
 export function Quotation() {
     return (
-        <>Quotation</>
+        <>
+
+            <h2>Conocé la cotización de tu vehículo</h2>
+        </>
     );
 }

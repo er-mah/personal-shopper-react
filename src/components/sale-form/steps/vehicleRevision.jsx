@@ -1,5 +1,8 @@
 export function VehicleRevision() {
     return (
-        <>VehicleRevision</>
+        <>
+
+            <h2>Programá la revisión de tu auto</h2>
+        </>
     );
 }

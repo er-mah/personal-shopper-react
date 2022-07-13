@@ -10,6 +10,7 @@ import {
     VehicleState,
     Year
 } from "./steps";
+
 import {ProgressBar} from "primereact/progressbar";
 import {Button} from "primereact/button";
 import React from "react";
@@ -48,42 +49,48 @@ export function NewSaleForm({proceedNext = true}) {
     };
     return (
         <>
-            <ProgressBar showValue={false} value={(currentStep * 100 / (componentList.length - 1))}/>
-
-            <header className="bg-white shadow">
-                <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
-                    <h3 className="text-xl font-bold text-gray-600">Vendé tu auto</h3>
-                </div>
-            </header>
-            {/* Stepper
-            <ProgressBar currentStep={currentStep} totalNoSteps={componentList.length}/>*/}
             {/* Form body */}
+            <div className="row">
 
-            <div className="row form-container">
-                <div className="col-lg-12">{componentList[currentStep].component}</div>
+                <ProgressBar className=""
+                             showValue={false}
+                             value={(currentStep * 100 / (componentList.length - 1))}/>
+
+                <div className="col-12 grid">
+                    <div className="col-1 flex justify-content-center">
+                        <Button icon="pi pi-angle-left"
+                                className="p-button-rounded p-button-text p-button-primary"
+                                aria-label="Back"
+                                disabled={!(currentStep > 0)}
+                                onClick={() => previousStep()}/>
+                    </div>
+                    <div className="col-10">
+
+                        {/* TODO: Breadcrumbs */}
+                        <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+                            <li>
+                                <a className="text-500 no-underline line-height-3 cursor-pointer">Application</a>
+                            </li>
+                            <li className="px-2">
+                                <i className="pi pi-angle-right text-500 line-height-3"></i>
+                            </li>
+                            <li>
+                                <span className="text-900 line-height-3">Analytics</span>
+                            </li>
+                        </ul>
+
+
+                        {componentList[currentStep].component}
+                    </div>
+                    <div className="col-1 flex justify-content-center">
+                        <Button icon="pi pi-angle-right"
+                                className="p-button-rounded p-button-text p-button-primary"
+                                aria-label="Next"
+                                disabled={!(currentStep < componentList.length - 1)}
+                                onClick={() => nextStep()}/>
+                    </div>
+                </div>
             </div>
-
-            {/* Navigation control
-
-            <FormControls
-                nextStep={nextStep}
-                previousStep={previousStep}
-                proceedNext={proceedNext}
-            />*/}
-
-
-            <Button icon="pi pi-angle-left"
-                    className="p-button-rounded p-button-primary"
-                    aria-label="Back"
-                    disabled={!(currentStep > 0)}
-                    onClick={() => previousStep()}/>
-
-            <Button icon="pi pi-angle-right"
-                    className="p-button-rounded p-button-primary"
-                    aria-label="Next"
-                    disabled={!(currentStep < componentList.length - 1)}
-                    onClick={() => nextStep()}/>
-
         </>
     );
 }

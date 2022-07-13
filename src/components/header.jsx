@@ -1,6 +1,5 @@
 import React from 'react';
 import {Menubar} from 'primereact/menubar';
-import {InputText} from 'primereact/inputtext';
 import logo from '../utils/assets/institutional/logo-con-texto.svg';
 import "../utils/styles/components.css";
 
@@ -13,13 +12,11 @@ export const Header = () => {
         },
     ];
 
-    const start = <img alt="logo" src={logo} height="38px"  className="mr-2 h-27rem w-auto"></img>;
+    const start = <img alt="logo" src={logo} className="px-3 h-2rem w-auto"></img>;
 
     return (
-        <div>
-            <div className="card">
-                <Menubar model={items} start={start}/>
-            </div>
-        </div>
+        <>
+            <Menubar className="py-3" model={items} start={start}/>
+        </>
     );
 }
