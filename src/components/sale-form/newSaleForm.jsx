@@ -1,4 +1,6 @@
 import {useState} from "react";
+import {ProgressBar} from "primereact/progressbar";
+import {Button} from "primereact/button";
 import {
     Brand, FormCompleted,
     LicencePlate,
@@ -10,16 +12,21 @@ import {
     VehicleState,
     Year
 } from "./steps";
+import {SellCarContext, SellCarProvider} from "../../contexts";
 
-import {ProgressBar} from "primereact/progressbar";
-import {Button} from "primereact/button";
-import React from "react";
+export function NewSaleForm() {
 
-export function NewSaleForm({proceedNext = true}) {
+    const [currentStep, setCurrentStep] = useState(0); // Persist actual step
 
-    // STATES
-    // Persist actual step
-    const [currentStep, setCurrentStep] = useState(0);
+    // Go forward to the next step
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1)
+    };
+
+    // Go backward to the prev step
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1)
+    };
 
     // Stores each component that is involved in the form
     const componentList = [
@@ -38,20 +45,9 @@ export function NewSaleForm({proceedNext = true}) {
         {name: "Finalización", component: <FormCompleted/>}
     ]
 
-    // Go forward to the next step
-    const nextStep = () => {
-        setCurrentStep(currentStep + 1)
-    };
-
-    // Go backward to the prev step
-    const previousStep = () => {
-        setCurrentStep(currentStep - 1)
-    };
     return (
-        <>
-            {/* Form body */}
+        <SellCarProvider>
             <div className="row">
-
                 <ProgressBar className=""
                              showValue={false}
                              value={(currentStep * 100 / (componentList.length - 1))}/>
@@ -66,8 +62,8 @@ export function NewSaleForm({proceedNext = true}) {
                     </div>
                     <div className="col-10">
 
-                        {/* TODO: Breadcrumbs */}
-                        <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+                        {/* TODO: Breadcrumbs
+                         <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
                             <li>
                                 <a className="text-500 no-underline line-height-3 cursor-pointer">Application</a>
                             </li>
@@ -78,7 +74,7 @@ export function NewSaleForm({proceedNext = true}) {
                                 <span className="text-900 line-height-3">Analytics</span>
                             </li>
                         </ul>
-
+                        */}
 
                         {componentList[currentStep].component}
                     </div>
@@ -91,6 +87,8 @@ export function NewSaleForm({proceedNext = true}) {
                     </div>
                 </div>
             </div>
-        </>
+        </SellCarProvider>
     );
+
+
 }

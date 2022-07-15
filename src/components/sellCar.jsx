@@ -1,31 +1,25 @@
-import {useState} from "react";
-
 import {NewSaleForm} from "./sale-form";
-import SellCarFormContext from "../context/SellCarFormContext";
+import {useState} from "react";
+import SellCarContext from "../contexts/sellCarForm.context";
+
 
 function SellCar() {
 
     // Form data is persisted in an object
     const initialFormValues = {
         vehicle: {
-            brand: "",
-            year: "",
-            model: "",
-            colour: "",
-            state: "",
-            licensePlate: "",
-            sellPrice: "",
-            sellTime: ""
-        },
-        owner: {
-            fullName: "",
-            email: "",
-            address: "",
-            phoneNumber: ""
-        },
-        inspection: {
-            date: "",
-            time: ""
+            brand: null,
+            year: null,
+            model: null,
+            colour: null,
+            state: null,
+            licensePlate: null,
+            sellPrice: null,
+            sellTime: null
+        }, owner: {
+            fullName: null, email: null, address: null, phoneNumber: null
+        }, inspection: {
+            date: null, time: null
         }
     }
 
@@ -33,15 +27,13 @@ function SellCar() {
     const [formData, setFormData] = useState(initialFormValues);
 
     // Enable/disable 'next' button within each component
-    const [proceedNext, setProceedNext] = useState(true);
+    const [proceedNext, setProceedNext] = useState(false);
 
-    return (
-        <>
-            <SellCarFormContext.Provider value={{formData, setFormData, setProceedNext}}>
-                <NewSaleForm proceedNext={proceedNext}/>
-            </SellCarFormContext.Provider>
-        </>
-    );
+    return (<>
+        <SellCarContext.Provider value={[formData, setFormData, proceedNext, setProceedNext]}>
+            <NewSaleForm/>
+        </SellCarContext.Provider>
+    </>);
 }
 
 export default SellCar;
