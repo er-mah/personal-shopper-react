@@ -18,3 +18,17 @@ body {
     height: 1rem;
     border-radius: 0;
 }
+
+emoji-slider {
+    --emoji-slider-bar-color: red;
+}
+
+datalist {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+input {
+    width: 50%;
+}
