@@ -1,0 +1,1 @@
+export logoConTexto from './logo-con-texto.svg'
