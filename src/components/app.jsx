@@ -10,7 +10,7 @@ function App() {
     return (
         <div className="App">
             <Header/>
-            {/* Replace with your content */}
+            {/* TODO: CONFIG ROUTING Replace with your content */}
             <NewSaleForm/>
         </div>
     );
