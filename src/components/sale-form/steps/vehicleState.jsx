@@ -5,6 +5,7 @@ import {InputTextarea} from "primereact/inputtextarea";
 export function VehicleState() {
 
     const [vehicleState, setVehicleState] =  useState(0);
+    /*
     const stateItems = [
         {emoji: '💀', text: 'Muy malo', step: 1},
         {emoji: '😕', text: 'Malo', step: 2},
@@ -12,7 +13,7 @@ export function VehicleState() {
         {emoji: '😉', text: 'Bueno', step: 4},
         {emoji: '🤩', text: 'Excelente', step: 5},
     ];
-
+    */
 
     const [comments, setCommentState] =  useState(null);
 

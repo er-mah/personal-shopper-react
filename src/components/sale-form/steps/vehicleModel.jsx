@@ -3,7 +3,7 @@ import {useState, useContext, useEffect} from "react";
 import {getModels} from "../../../services/mah.service";
 import {SellCarContext} from "../../../contexts";
 
-export function VehicleModel() {
+export function VehicleModel({step, setStep}) {
 
     // Get information from context
     const [formData, setFormData] = useContext(SellCarContext);
@@ -18,10 +18,11 @@ export function VehicleModel() {
             setModelsFromApi(res.data.data);
             setLoading(false);
         })
-    }, []);
+    }, [formData]);
 
     const selectModel = (modelId) => {
         setFormData({...formData, vehicleModel: modelId})
+        setStep(step + 1)
     }
 
     return (<>

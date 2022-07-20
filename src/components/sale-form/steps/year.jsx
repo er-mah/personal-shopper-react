@@ -1,9 +1,9 @@
 import {Button} from "primereact/button";
 import {useContext, useEffect, useState} from "react";
-import {getBrands, getYears} from "../../../services/mah.service";
+import {getYears} from "../../../services/mah.service";
 import {SellCarContext} from "../../../contexts";
 
-export function Year() {
+export function Year({step, setStep}) {
 
     // Get information from context
     const [formData, setFormData] = useContext(SellCarContext);
@@ -14,14 +14,16 @@ export function Year() {
 
     // When component is created, get years
     useEffect(() => {
-        getYears(formData.vehicleBrand).then((res) => {
+        getYears(formData.vehicleBrand)
+            .then((res) => {
             setYearsFromApi(res.data.data);
             setLoading(false);
         })
-    }, []);
+    }, [formData]);
 
     const selectYear = (year) => {
         setFormData({...formData, vehicleYear: year})
+        setStep(step + 1)
     }
 
     return (

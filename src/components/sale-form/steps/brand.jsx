@@ -3,7 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {getBrands} from "../../../services/mah.service";
 import {SellCarContext} from "../../../contexts";
 
-export function Brand() {
+export function Brand({step, setStep}) {
 
     // Get information from context
     const [formData, setFormData] = useContext(SellCarContext);
@@ -22,11 +22,12 @@ export function Brand() {
 
     const selectBrand = (id) => {
         setFormData({...formData, vehicleBrand: id})
+        setStep(step + 1)
     }
 
 
     return <>
-        <h3>¿Qué marca?</h3>
+        <h2>¿Qué marca?</h2>
         {
             isLoading ?
                 <p>Cargando...</p> :
