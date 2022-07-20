@@ -1,17 +1,26 @@
-import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
-import "primereact/resources/primereact.min.css";                  //core css
-import "primeicons/primeicons.css";                                //icons
-import "primeflex/primeflex.css";                                  //primeflex css
+import {Routes, Route} from "react-router-dom";
 
-import {NewSaleForm} from "./components/sale-form";
-import {Header} from "./components/header";
+import {AuthProvider} from "../contexts/authentication.context";
+import {Header} from "./header";
+import SignUp from "./signUp";
+import Home from "./home";
+import SignIn from "./signIn";
+import {NewSaleForm} from "./newSaleForm";
+
 
 function App() {
     return (
         <div className="App">
-            <Header/>
-            {/* TODO: CONFIG ROUTING Replace with your content */}
-            <NewSaleForm/>
+            <AuthProvider>
+                <Header/>
+                <Routes>
+                    {/* TODO: CONFIG ROUTING Replace with your content */}
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/registrarme" element={<SignUp/>}/>
+                    <Route path="/iniciar-sesion" element={<SignIn/>}/>
+                    <Route path="/vende-tu-auto" element={<NewSaleForm/>}/>
+                </Routes>
+            </AuthProvider>
         </div>
     );
 }
