@@ -11,7 +11,7 @@ import {
     VehicleModel, VehicleRevision,
     VehicleState,
     Year
-} from "./sale-form/steps";
+} from "./sale-form-steps";
 import {SellCarProvider} from "../contexts";
 
 export function NewSaleForm() {

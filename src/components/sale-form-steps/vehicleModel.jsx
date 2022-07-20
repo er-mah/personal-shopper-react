@@ -1,7 +1,7 @@
 import {Button} from "primereact/button";
 import {useState, useContext, useEffect} from "react";
-import {getModels} from "../../../services/mah.service";
-import {SellCarContext} from "../../../contexts";
+import {getModels} from "../../services/mah.service";
+import {SellCarContext} from "../../contexts";
 
 export function VehicleModel({step, setStep}) {
 

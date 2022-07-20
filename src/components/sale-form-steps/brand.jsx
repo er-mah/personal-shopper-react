@@ -1,7 +1,7 @@
 import {Button} from "primereact/button";
 import {useContext, useEffect, useState} from "react";
-import {getBrands} from "../../../services/mah.service";
-import {SellCarContext} from "../../../contexts";
+import {getBrands} from "../../services/mah.service";
+import {SellCarContext} from "../../contexts";
 
 export function Brand({step, setStep}) {
 
