@@ -2,13 +2,44 @@ import React from 'react';
 import {Menubar} from 'primereact/menubar';
 import logo from '../utils/assets/institutional/logo-con-texto.svg';
 import "../utils/styles/components.css";
+import {useNavigate} from "react-router-dom";
 
 export const Header = () => {
+
+    let navigate = useNavigate();
+
     const items = [
-        {label: 'Inicio'},
+        {
+            label: 'Inicio',
+            command: () => {
+                navigate("/");
+            }
+        },
         {
             label: 'Usados',
-            items: [{label: 'Marketplace'}, {label: 'Cotizá tu auto'}]
+            items: [
+                {
+                    label: 'Marketplace',
+                },
+                {
+                    label: 'Cotizá tu auto',
+                    command: () => {
+                        navigate("/vende-tu-auto");
+                    }
+                }
+            ]
+        },
+        {
+            label: 'Iniciar sesión',
+            command: () => {
+                navigate("/iniciar-sesion");
+            }
+        },
+        {
+            label: 'Registrarme',
+            command: () => {
+                navigate("/registrarme");
+            }
         },
     ];
 
