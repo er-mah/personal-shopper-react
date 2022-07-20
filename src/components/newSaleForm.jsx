@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {cloneElement, useState} from "react";
 import {ProgressBar} from "primereact/progressbar";
 import {Button} from "primereact/button";
 import {
@@ -11,8 +11,8 @@ import {
     VehicleModel, VehicleRevision,
     VehicleState,
     Year
-} from "./steps";
-import {SellCarContext, SellCarProvider} from "../../contexts";
+} from "./sale-form/steps";
+import {SellCarProvider} from "../contexts";
 
 export function NewSaleForm() {
 
@@ -45,6 +45,9 @@ export function NewSaleForm() {
         {name: "Finalización", component: <FormCompleted/>}
     ]
 
+    let childElement = cloneElement(componentList[currentStep].component,
+        {step: currentStep, setStep: setCurrentStep});
+
     return (
         <SellCarProvider>
             <div className="row">
@@ -61,22 +64,7 @@ export function NewSaleForm() {
                                 onClick={() => previousStep()}/>
                     </div>
                     <div className="col-10">
-
-                        {/* TODO: Breadcrumbs
-                         <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-                            <li>
-                                <a className="text-500 no-underline line-height-3 cursor-pointer">Application</a>
-                            </li>
-                            <li className="px-2">
-                                <i className="pi pi-angle-right text-500 line-height-3"></i>
-                            </li>
-                            <li>
-                                <span className="text-900 line-height-3">Analytics</span>
-                            </li>
-                        </ul>
-                        */}
-
-                        {componentList[currentStep].component}
+                        { childElement }
                     </div>
                     <div className="col-1 flex justify-content-center">
                         <Button icon="pi pi-angle-right"
