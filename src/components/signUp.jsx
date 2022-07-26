@@ -3,7 +3,6 @@ import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import {Toast} from "primereact/toast";
 
-
 import {useAuth} from "../contexts/authentication.context";
 
 
@@ -37,6 +36,14 @@ export default function SignUp() {
 
             await signUp(emailRef.current.value, passwordRef.current.value, setErrorMsg)
 
+            showToast('success', 'Registro en miautohoy.com', 'Satisfactorio')
+            return toast.current.show({
+                severity: 'success',
+                summary: 'Registro en miautohoy.com',
+                detail: 'Satisfactorio',
+                life: 3000
+            });
+
         } catch (e) {
             setErrorMsg(e)
         }
@@ -44,12 +51,12 @@ export default function SignUp() {
         setLoading(false)
     }
 
-    function showError() {
+    function showToast(severity, title, msg) {
 
         return toast.current.show({
-            severity: 'error',
-            summary: 'Creación de cuenta',
-            detail: errorMsg,
+            severity: severity,
+            summary: title,
+            detail: msg,
             life: 3000
         });
     }
@@ -57,7 +64,7 @@ export default function SignUp() {
     return (
         <>
             <Toast ref={toast} position="top-right"/>
-            {errorMsg && showError(errorMsg)}
+            {errorMsg && showToast('error', 'Creación de cuenta', errorMsg)}
             <div className="flex align-items-center justify-content-center mt-5">
                 <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
                     <div className="text-center mb-5">
@@ -66,16 +73,16 @@ export default function SignUp() {
 
                     <form onSubmit={onFormSubmit}>
                         <label htmlFor="email" className="block text-900 font-medium mb-2">Correo electrónico</label>
-                        <InputText id="email" type="text" className="w-full mb-3" ref={emailRef} required/>
+                        <InputText id="email" type="text" className="w-full mb-3" ref={emailRef} autoComplete="new-email" required/>
 
                         <label htmlFor="password" className="block text-900 font-medium mb-2">Contraseña</label>
-                        <InputText id="password" type="password" className="w-full mb-3" ref={passwordRef} required/>
+                        <InputText id="password" type="password" className="w-full mb-3" ref={passwordRef} autoComplete="new-password" required/>
 
 
                         <label htmlFor="confPassword" className="block text-900 font-medium mb-2">Confirmá tu
                             contraseña</label>
                         <InputText id="confPassword" type="password" className="w-full mb-6" ref={passwordConfirmRef}
-                                   required/>
+                                   autoComplete="new-password" required/>
 
                         <Button label="Registrarme" type="submit" icon="pi pi-user" className="w-full"
                                 disabled={loading}/>
