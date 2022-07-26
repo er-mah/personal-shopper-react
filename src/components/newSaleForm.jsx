@@ -1,6 +1,5 @@
 import {cloneElement, useState} from "react";
 import {ProgressBar} from "primereact/progressbar";
-import {Button} from "primereact/button";
 import {
     Brand, FormCompleted,
     LicencePlate,
@@ -13,20 +12,13 @@ import {
     Year
 } from "./sale-form-steps";
 import {SellCarProvider} from "../contexts";
+import {Route, Routes} from "react-router-dom";
+
+import {MAH_RED_COLOUR, NEW_SALE_FORM_URLS} from "../utils/constants";
 
 export function NewSaleForm() {
 
     const [currentStep, setCurrentStep] = useState(0); // Persist actual step
-
-    // Go forward to the next step
-    const nextStep = () => {
-        setCurrentStep(currentStep + 1)
-    };
-
-    // Go backward to the prev step
-    const previousStep = () => {
-        setCurrentStep(currentStep - 1)
-    };
 
     // Stores each component that is involved in the form
     const componentList = [
@@ -45,35 +37,28 @@ export function NewSaleForm() {
         {name: "Finalización", component: <FormCompleted/>}
     ]
 
-    let childElement = cloneElement(componentList[currentStep].component,
-        {step: currentStep, setStep: setCurrentStep});
-
     return (
         <SellCarProvider>
             <div className="row">
-                <ProgressBar className=""
+                <ProgressBar className="mb-2"
                              showValue={false}
-                             value={(currentStep * 100 / (componentList.length - 1))}/>
-
-                <div className="col-12 grid">
-                    <div className="col-1 flex justify-content-center">
-                        <Button icon="pi pi-angle-left"
-                                className="p-button-rounded p-button-text p-button-primary"
-                                aria-label="Back"
-                                disabled={!(currentStep > 0)}
-                                onClick={() => previousStep()}/>
-                    </div>
-                    <div className="col-10">
-                        { childElement }
-                    </div>
-                    <div className="col-1 flex justify-content-center">
-                        <Button icon="pi pi-angle-right"
-                                className="p-button-rounded p-button-text p-button-primary"
-                                aria-label="Next"
-                                disabled={!(currentStep < componentList.length - 1)}
-                                onClick={() => nextStep()}/>
-                    </div>
-                </div>
+                             value={(currentStep * 100 / (componentList.length - 1))}
+                             color={MAH_RED_COLOUR}/>
+                <Routes>
+                    <Route path={NEW_SALE_FORM_URLS.BRAND} element={<Brand step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.YEAR} element={<Year step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.MODEL} element={<VehicleModel step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.VEHICLE_DETAILS} element={<VehicleInfo step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.SIGN_IN} element={<Login step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.OWNER} element={<PersonalInfo step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.VEHICLE_COLOUR} element={<VehicleColour step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.VEHICLE_STATE} element={<VehicleState step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.LICENCE_PLATE} element={<LicencePlate step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.SALE} element={<PersonalRequirements step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.QUOTATION} element={<Quotation step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.REVISION} element={<VehicleRevision step={currentStep} setStep={setCurrentStep}/>}/>
+                    <Route path={NEW_SALE_FORM_URLS.DONE} element={<FormCompleted step={currentStep} setStep={setCurrentStep}/>}/>
+                </Routes>
             </div>
         </SellCarProvider>
     );
