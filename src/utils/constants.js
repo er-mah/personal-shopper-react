@@ -18,7 +18,7 @@ export const NEW_SALE_FORM_URLS = {
     SALE: "/requerimientos-venta",
     QUOTATION: "/precio-estimado",
     REVISION: "/inspeccion",
-    DONE: "/terminando"
+    FORM_COMPLETE: "/terminando"
 }
 
 export const MAH_RED_COLOUR = "#E21F25"
