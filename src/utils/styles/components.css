@@ -19,7 +19,7 @@ body {
     border-radius: 0;
 }
 
-emoji-slider {
+.emoji-slider {
     --emoji-slider-bar-color: red;
 }
 
