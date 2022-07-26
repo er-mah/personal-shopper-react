@@ -3,6 +3,7 @@ import {Menubar} from 'primereact/menubar';
 import logo from '../utils/assets/institutional/logo-con-texto.svg';
 import "../utils/styles/components.css";
 import {useNavigate} from "react-router-dom";
+import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../utils/constants";
 
 export const Header = () => {
 
@@ -12,35 +13,24 @@ export const Header = () => {
         {
             label: 'Inicio',
             command: () => {
-                navigate("/");
+                navigate(MAIN_URLS.HOME);
             }
         },
         {
-            label: 'Usados',
-            items: [
-                {
-                    label: 'Marketplace',
-                },
-                {
-                    label: 'Cotizá tu auto',
-                    command: () => {
-                        navigate("/vende-tu-auto");
-                    }
-                }
-            ]
+            label: 'Usados'
+        },
+        {
+            label: 'Cotizá tu auto',
+            command: () => {
+                navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.BRAND);
+            }
         },
         {
             label: 'Iniciar sesión',
             command: () => {
-                navigate("/iniciar-sesion");
+                navigate(MAIN_URLS.SIGN_IN);
             }
-        },
-        {
-            label: 'Registrarme',
-            command: () => {
-                navigate("/registrarme");
-            }
-        },
+        }
     ];
 
     const start = <img alt="logo" src={logo} className="px-3 h-2rem w-auto"></img>;
