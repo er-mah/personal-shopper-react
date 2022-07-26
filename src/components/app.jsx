@@ -6,6 +6,7 @@ import SignUp from "./signUp";
 import Home from "./home";
 import SignIn from "./signIn";
 import {NewSaleForm} from "./newSaleForm";
+import {MAIN_URLS} from "../utils/constants";
 
 
 function App() {
@@ -14,11 +15,10 @@ function App() {
             <AuthProvider>
                 <Header/>
                 <Routes>
-                    {/* TODO: CONFIG ROUTING Replace with your content */}
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/registrarme" element={<SignUp/>}/>
-                    <Route path="/iniciar-sesion" element={<SignIn/>}/>
-                    <Route path="/vende-tu-auto" element={<NewSaleForm/>}/>
+                    <Route path={MAIN_URLS.HOME} element={<Home/>}/>
+                    <Route path={MAIN_URLS.SIGN_UP} element={<SignUp/>}/>
+                    <Route path={MAIN_URLS.SIGN_IN} element={<SignIn/>}/>
+                    <Route path={MAIN_URLS.NEW_SALE_FORM + "/*"} element={<NewSaleForm/>}/>
                 </Routes>
             </AuthProvider>
         </div>
