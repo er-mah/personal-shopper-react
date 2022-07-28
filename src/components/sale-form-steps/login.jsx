@@ -1,20 +1,24 @@
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
+import {useEffect} from "react";
 
 export function Login({step, setStep}) {
 
     let navigate = useNavigate();
 
     const previousPage = () => {
-        setStep(step - 1)
         navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.VEHICLE_DETAILS)
     }
 
     const nextPage = () => {
-        setStep(step + 1)
-        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.OWNER)
+        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.VEHICLE_COLOUR)
     }
+
+    // When component is rendered
+    useEffect(() => {
+        setStep(3); // Set progress bar status
+    }, []);
 
     return (
         <>

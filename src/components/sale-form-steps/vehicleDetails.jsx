@@ -1,21 +1,26 @@
 import {Button} from "primereact/button";
 import {Chip} from "primereact/chip";
-import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+
+import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
 
 export function VehicleDetails({step, setStep}) {
 
     let navigate = useNavigate();
 
     const previousPage = () => {
-        setStep(step - 1)
-        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL)
+        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.BRAND)
     }
 
     const nextPage = () => {
-        setStep(step + 1)
         navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.SIGN_IN)
     }
+
+    // When component is rendered
+    useEffect(() => {
+        setStep(2); // Set progress bar status
+    }, []);
 
     return <>
         <div className="grid">

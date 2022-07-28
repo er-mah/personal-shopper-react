@@ -3,20 +3,24 @@ import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
 import {Button} from "primereact/button";
 import {Dropdown} from "primereact/dropdown";
 import {InputText} from "primereact/inputtext";
+import {useEffect} from "react";
 
 export function Quotation({step, setStep}) {
 
     let navigate = useNavigate();
 
     const previousPage = () => {
-        setStep(step - 1)
         navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.SALE)
     }
 
     const nextPage = () => {
-        setStep(step + 1)
         navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION)
     }
+
+    // When component is rendered
+    useEffect(() => {
+        setStep(6); // Set progress bar status
+    }, []);
 
     return (
         <>

@@ -1,15 +1,20 @@
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
+import {useEffect} from "react";
 
 export function FormComplete({step, setStep}) {
 
     let navigate = useNavigate();
 
     const previousPage = () => {
-        setStep(step - 1)
         navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.QUOTATION)
     }
+
+    // When component is rendered
+    useEffect(() => {
+        setStep(8); // Set progress bar status
+    }, []);
 
     return (
         <>

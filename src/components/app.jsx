@@ -3,7 +3,7 @@ import {Routes, Route} from "react-router-dom";
 import {AuthProvider} from "../contexts/authentication.context";
 import {Header} from "./header";
 import SignUp from "./signUp";
-import Home from "./home";
+import {Home} from "./home";
 import SignIn from "./signIn";
 import {NewSaleForm} from "./newSaleForm";
 import {MAIN_URLS} from "../utils/constants";

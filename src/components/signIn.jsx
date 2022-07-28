@@ -5,6 +5,7 @@ import {useAuth} from "../contexts/authentication.context";
 import {useRef, useState} from "react";
 import {Toast} from "primereact/toast";
 import {Link, useNavigate} from "react-router-dom";
+import {MAIN_URLS} from "../utils/constants";
 
 export default function SignIn() {
 
@@ -54,8 +55,10 @@ export default function SignIn() {
                 <div className="text-center mb-5">
                     <div className="text-900 text-3xl font-medium mb-3">Bienvenido</div>
                     <span className="text-600 font-medium line-height-3">¿No tenés cuenta?</span>
-                    <Link to="/registrarme"
-                          className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Creá una</Link>
+                    <Link to={MAIN_URLS.SIGN_UP}
+                          className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
+                        Creá una
+                    </Link>
                 </div>
 
                 <form onSubmit={onFormSubmit}>
