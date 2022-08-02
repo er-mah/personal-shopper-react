@@ -17,7 +17,7 @@ export function VehicleRevision({step, setStep}) {
 
     // When component is rendered
     useEffect(() => {
-        setStep(7); // Set progress bar status
+        setStep(6); // Set progress bar status
     }, []);
 
     return (

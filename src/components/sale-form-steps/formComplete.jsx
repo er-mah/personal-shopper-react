@@ -13,7 +13,7 @@ export function FormComplete({step, setStep}) {
 
     // When component is rendered
     useEffect(() => {
-        setStep(8); // Set progress bar status
+        setStep(7); // Set progress bar status
     }, []);
 
     return (

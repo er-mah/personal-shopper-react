@@ -2,18 +2,17 @@ import { Button } from "primereact/button";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as MahService from "../../services/mah.service";
-
 import { SellCarContext } from "../../contexts";
 import { MAIN_URLS, NEW_SALE_FORM_URLS } from "../../utils/constants";
 import { BRAND_LOGOS } from "../../utils/assets/brands";
 import { Dropdown } from "primereact/dropdown";
+import VehicleService from "../../services/vehicle.service";
 
-export function Brand({ step, setStep }) {
+export function Model({ step, setStep }) {
   let navigate = useNavigate();
 
   // Get information from context
-  const [formData, setFormData] = useContext(SellCarContext);
+  const [formData, setFormData, quotationInfo, setQuotationInfo] = useContext(SellCarContext);
 
   // Store infoAuto ids in main brands
   const [mainBrands, setMainBrands] = useState([
@@ -68,20 +67,30 @@ export function Brand({ step, setStep }) {
 
   const [isLoading, setLoading] = useState(true);
 
+
+  const previousPage = () => {
+    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.START);
+  };
+
   const nextPage = () => {
+
+    // TODO: add brand, model, version
     setFormData({
-      vehicleBrandID: selectedBrandId,
-      vehicleYear: selectedYear,
-      vehicleModelID: selectedModelId,
-      vehicleVersionCodiaID: selectedVersion,
+      year: selectedYear
     });
 
-    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.VEHICLE_DETAILS);
+    // TODO: add brand, model, version
+    setQuotationInfo({
+      year: selectedYear,
+      codia: selectedVersion
+    });
+
+    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.VEHICLE_SPECS);
   };
 
   // When component is rendered, get brands
   useEffect(() => {
-    setStep(1); // Set progress bar status
+    setStep(2); // Set progress bar status
 
     // If it is defined in context, store it
     setSelectedBrandId(formData.vehicleBrandID);
@@ -89,9 +98,7 @@ export function Brand({ step, setStep }) {
     setSelectedModelId(formData.vehicleModelID);
     setSelectedVersion(formData.vehicleVersionCodiaID);
 
-
-
-    MahService.getBrands().then((res) => {
+    new VehicleService().getBrands().then((res) => {
       const brands = res.data.data;
       setBrandsFromApi(brands);
 
@@ -115,7 +122,7 @@ export function Brand({ step, setStep }) {
     setSelectedVersion(null);
     setSelectedBrandId(brandId);
 
-    MahService.getYears(brandId).then((res) => {
+    new VehicleService().getYears(brandId).then((res) => {
       setYearsFromApi(res.data.data);
     });
   };
@@ -126,7 +133,7 @@ export function Brand({ step, setStep }) {
 
     setSelectedYear(year);
 
-    MahService.getModels(selectedBrandId, year).then((res) => {
+    new VehicleService().getModels(selectedBrandId, year).then((res) => {
       setModelsFromApi(res.data.data);
     });
   };
@@ -135,7 +142,7 @@ export function Brand({ step, setStep }) {
     setSelectedVersion(null);
     setSelectedModelId(modelId);
 
-    MahService.getVersions(selectedBrandId, selectedYear, modelId).then(
+    new VehicleService().getVersions(selectedBrandId, selectedYear, modelId).then(
       (res) => {
         setVersionsFromApi(res.data.data);
       }
@@ -155,12 +162,14 @@ export function Brand({ step, setStep }) {
               icon="pi pi-angle-left"
               className="p-button-rounded p-button-text p-button-danger"
               aria-label="Back"
-              disabled={true}
+              onClick={() => previousPage()}
             />
           </div>
         </div>
         <div className="col-10 p-0">
           <h2>¿Qué marca?</h2>
+          {JSON.stringify(formData)}
+          {JSON.stringify(quotationInfo)}
           {isLoading ? (
             <p>Cargando...</p>
           ) : (
@@ -186,7 +195,6 @@ export function Brand({ step, setStep }) {
                   </div>
                 ))}
               </div>
-
               <h3 className="mt-4">
                 Definí el año, el modelo y la versión de tu auto
               </h3>
