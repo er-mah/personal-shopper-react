@@ -15,7 +15,7 @@ export const Header = () => {
         }
     }, {label: 'Usados'}, {
         label: 'Cotizá tu auto', command: () => {
-            navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.BRAND);
+            navigate(MAIN_URLS.NEW_SALE_FORM);
         }
     }];
 

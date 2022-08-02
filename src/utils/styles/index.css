@@ -1,14 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
 
-/*
-body {
-  --font-family: 'Raleway', sans-serif;
+:root {
+    --font-family: 'Raleway', sans-serif;
+    --mah-colour: #E21F25;
+    --primary-color: var(--mah-colour);
+    --font-size: 90%
 }
-
- */
 
 body {
     font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.p-component {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+}
+
+body {
+    font-size: var(--font-size);
+}
+
+.p-inputtext {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+}
+
+.p-placeholder {
+    font-size: var(--font-size);
+}
+
+
+label {
+    font-size: var(--font-size);
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #ffffff;
+    border-color: var(--mah-colour);
+    color: var(--mah-colour);
+}
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    background-color: var(--mah-colour);
 }
