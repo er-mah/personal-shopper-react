@@ -1,0 +1,1 @@
+export const MAH_RED_COLOUR = "#E21F25"
