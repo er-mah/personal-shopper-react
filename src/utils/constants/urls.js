@@ -1,8 +1,5 @@
 export const MAIN_URLS = {
-    HOME: "/",
-    SIGN_IN: "/login",
-    SIGN_UP: "/register",
-    NEW_SALE_FORM: "/cotiza-tu-auto"
+    NEW_SALE_FORM: "/vende-tu-auto"
 }
 
 export const NEW_SALE_FORM_URLS = {

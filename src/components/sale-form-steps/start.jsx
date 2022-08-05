@@ -4,12 +4,11 @@ import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
 import {useEffect} from "react";
 
 export function Start({setStep}) {
-
     let navigate = useNavigate();
 
     const nextPage = () => {
-        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL)
-    }
+        navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL);
+    };
 
     // When component is rendered
     useEffect(() => {
@@ -18,23 +17,26 @@ export function Start({setStep}) {
 
     return (
         <>
-            <div className="grid">
-                <div className="col-1 flex justify-content-center">
-                    <Button icon="pi pi-angle-left"
-                            className="p-button-rounded p-button-text p-button-danger hidden"
-                            aria-label="Back"/>
-                </div>
-                <div className="col-10">
-                    <h2>Necesitamos que inicies sesion completar información adicional</h2>
-                    <p>Insertar componente de inicio de sesión</p>
-                </div>
-                <div className="col-1 flex justify-content-center">
-                    <Button icon="pi pi-angle-right"
-                            className="p-button-rounded p-button-text p-button-danger"
-                            aria-label="Next"
-                            onClick={() => nextPage()}/>
-                </div>
+            <div className={"px-5"}>
+                <h2>Necesitamos que inicies sesion completar información adicional</h2>
+                <p>Insertar componente de inicio de sesión</p>
             </div>
+
+
+
+            <Button
+                icon="pi pi-angle-left"
+                className="p-button-rounded p-button-danger left-button"
+                aria-label="Back"
+            />
+
+            <Button
+                icon="pi pi-angle-right"
+                className="p-button-rounded p-button-danger right-button"
+                aria-label="Next"
+                onClick={() => nextPage()}
+            />
+
         </>
     );
 }

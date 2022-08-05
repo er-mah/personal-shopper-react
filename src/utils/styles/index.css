@@ -11,37 +11,10 @@ body {
     font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: var(--font-size);
 }
 
 .p-component {
     font-family: var(--font-family);
     font-size: var(--font-size);
-}
-
-body {
-    font-size: var(--font-size);
-}
-
-.p-inputtext {
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-}
-
-.p-placeholder {
-    font-size: var(--font-size);
-}
-
-
-label {
-    font-size: var(--font-size);
-}
-
-.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    background: #ffffff;
-    border-color: var(--mah-colour);
-    color: var(--mah-colour);
-}
-
-.p-tabview .p-tabview-nav .p-tabview-ink-bar {
-    background-color: var(--mah-colour);
 }

@@ -10,6 +10,7 @@ import peugeot from './peugeot.svg'
 import renault from './renault.svg'
 import toyota from './toyota.svg'
 import vw from './vw.svg'
+import whatsapp from './whatsapp-logo.png'
 
 export const BRAND_LOGOS = {
     FIAT: fiat,
@@ -25,3 +26,5 @@ export const BRAND_LOGOS = {
     CHRYSLER: chrysler,
     HONDA: honda,
 }
+
+export const WHATSAPP_LOGO = whatsapp;
