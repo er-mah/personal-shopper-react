@@ -2,39 +2,66 @@ import axios from "axios";
 
 function VecicleService() {
   this.getBrands = async () => {
-    return axios.get(`${process.env.REACT_APP_MAH_URI}/vehicle/brands`);
+    try {
+      return axios.get(`${process.env.REACT_APP_MAH_URI}/vehicle/brands`);
+    } catch (err) {
+      console.error(err);
+    }
+
+
   };
 
   this.getYears = (brandId) => {
-    return axios.get(
-      `${process.env.REACT_APP_MAH_URI}/vehicle/years?brandId=${brandId}`
-    );
+    try {
+      return axios.get(
+          `${process.env.REACT_APP_MAH_URI}/vehicle/years?brandId=${brandId}`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+
   };
 
   this.getModels = async (brandId, year) => {
-    return axios.get(
-      `${process.env.REACT_APP_MAH_URI}/vehicle/models?brandId=${brandId}&year=${year}`
-    );
+    try {
+      return axios.get(
+          `${process.env.REACT_APP_MAH_URI}/vehicle/models?brandId=${brandId}&year=${year}`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+
+
   };
 
   this.getVersions = async (brandId, year, modelId) => {
-    return axios.get(
-      `${process.env.REACT_APP_MAH_URI}/vehicle/versions?brandId=${brandId}&year=${year}&modelId=${modelId}`
-    );
+    try {
+      return axios.get(
+          `${process.env.REACT_APP_MAH_URI}/vehicle/versions?brandId=${brandId}&year=${year}&modelId=${modelId}`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+
+
   };
 
   this.getDetailedInfo = async (versionId) => {
-    return axios.get(
-      `${process.env.REACT_APP_MAH_URI}/vehicle/${versionId}/details`
-    );
+    try {
+      return axios.get(
+          `${process.env.REACT_APP_MAH_URI}/vehicle/${versionId}/details`
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   this.getQuotation = async (payload) => {
-    console.log("get quotation")
     try {
-      const resp = await axios.post(`${process.env.REACT_APP_MAH_URI}/vehicle/price`, payload);
-      console.log(resp.data);
-      return resp;
+      return await axios.post(
+        `${process.env.REACT_APP_MAH_URI}/vehicle/price`,
+        payload
+      );
     } catch (err) {
       console.error(err);
     }
