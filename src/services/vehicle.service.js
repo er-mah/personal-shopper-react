@@ -59,8 +59,18 @@ function VecicleService() {
   this.getQuotation = async (payload) => {
     try {
       return await axios.post(
-        `${process.env.REACT_APP_MAH_URI}/vehicle/price`,
-        payload
+          `${process.env.REACT_APP_MAH_URI}/vehicle/price`,
+          payload
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  this.getDniInfo = async (dni, sex) => {
+    try {
+      return await axios.get(
+          `${process.env.REACT_APP_MAH_URI}/vehicle/dni?dni=${dni}&sex=${sex}`
       );
     } catch (err) {
       console.error(err);
