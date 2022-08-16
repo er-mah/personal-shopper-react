@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { SellCarContext } from "../../contexts";
-import { MAIN_URLS, NEW_SALE_FORM_URLS } from "../../utils/constants";
+import {
+  REVISION_OPTIONS,
+  MAIN_URLS,
+  NEW_SALE_FORM_URLS,
+} from "../../utils/constants";
 import { addLocale, locale } from "primereact/api";
 
 export function VehicleRevision({ _step, setStep }) {
@@ -12,72 +16,31 @@ export function VehicleRevision({ _step, setStep }) {
 
   const [formData, setFormData, _quotationInfo, _setQuotationInfo] =
     useContext(SellCarContext);
-  const [datetime, setDatetime] = useState(new Date());
-  const [strDate, setStrDate] = useState(null);
 
   // DATEPICKER VARIABLES
   let today = new Date();
   let thisMonth = today.getMonth();
   let thisyear = today.getFullYear();
-
   let minDate = today;
-
   let nextMonth = thisMonth === 11 ? 0 : thisMonth + 1;
   let nextYear = nextMonth === 0 ? thisyear + 1 : thisyear;
   let maxDate = new Date();
   maxDate.setMonth(nextMonth);
   maxDate.setFullYear(nextYear);
-
-  addLocale("es", {
-    firstDayOfWeek: 0,
-    dayNames: [
-      "domingo",
-      "lunes",
-      "martes",
-      "miércoles",
-      "jueves",
-      "viernes",
-      "sábado",
-    ],
-    dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-    dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-    monthNames: [
-      "enero",
-      "febrero",
-      "marzo",
-      "abril",
-      "mayo",
-      "junio",
-      "julio",
-      "agosto",
-      "septiembre",
-      "octubre",
-      "noviembre",
-      "diciembre",
-    ],
-    monthNamesShort: [
-      "ene",
-      "feb",
-      "mar",
-      "abr",
-      "may",
-      "jun",
-      "jul",
-      "ago",
-      "sep",
-      "oct",
-      "nov",
-      "dic",
-    ],
-    today: "Hoy",
-    clear: "Limpiar",
-  });
-
+  addLocale("es", REVISION_OPTIONS.calendarOpts);
   locale("es");
+  let invalidDates = [today];
+
+  const [multipleDates, setMultipleDates] = useState(null);
 
   // When component is rendered
   useEffect(() => {
-    setStep(6); // Set progress bar status
+    setStep(7); // Set progress bar status
+
+    if (formData.quotationBaseValue == null) {
+      navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.QUOTATION)
+    }
+
   }, []);
 
   const previousPage = () => {
@@ -85,76 +48,92 @@ export function VehicleRevision({ _step, setStep }) {
   };
 
   const nextPage = () => {
-    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.FORM_COMPLETE);
+    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.NEXT_STEPS);
   };
-
-  let invalidDates = [today];
-
-  function setRevisionDatetime(e) {
-    setStrDate(e.target.value.toLocaleString());
-    setDatetime(e.value);
-    setFormData({ ...formData, revisionDatetime: e.value });
-  }
 
   return (
     <>
       <div className="px-5">
-        <div className={"grid"}>
-          <div className={"col-8"}>
-            <h2>Programá la revisión de tu auto</h2>
-            <p>
-              Necesitamos definir una <strong>fecha estimada</strong> donde vos
-              tengas tiempo libre para realizar la revisión de tu auto.
-            </p>
-            <p>
-              La misma será coordinada mas tarde por nuestro equipo por medio de
-              tus datos de contacto.
-            </p>
-            {strDate !== null ? (
-              <>
-                <h4 className={'mt-5'}>Fecha seleccionada: </h4>
-                <h2
-                  className={
-                    "border-round bg-red-100 text-800 p-3 mx-3 w-16rem text-center"
-                  }
-                >
-                  {strDate}
-                </h2>
-
-                <Button
-                    label={'Terminar formulario'}
-                    className="p-button-rounded p-button-danger ml-3"
-                    aria-label="Next"
-                    onClick={() => nextPage()}
-                />
-              </>
-            ) : (
-              <></>
-            )}
+        <div className="flex my-3">
+          <div className="flex-wrap sm:flex align-items-center justify-content-start hidden">
+            <Button
+              icon="pi pi-angle-left"
+              className="p-button-rounded p-button-sm p-button-danger "
+              aria-label="Back"
+              onClick={() => previousPage()}
+              label={"Atrás"}
+            />
           </div>
-          <div className={"col-4"}>
-            <Calendar
-              id="minmax"
-              value={datetime}
-              onChange={(e) => setRevisionDatetime(e)}
-              minDate={minDate}
-              maxDate={maxDate}
-              readOnlyInput
-              showTime
-              disabledDays={[0]}
-              disabledDates={invalidDates}
-              inline
+          <div className="flex-1 sm:flex align-items-center justify-content-center hidden">
+            <h2 className={"hidden sm:flex"}>Programá la revisión mecánica</h2>
+          </div>
+          <div className="flex-wrap sm:flex align-items-center justify-content-end hidden">
+            <Button
+              icon="pi pi-angle-right"
+              className="p-button-rounded p-button-sm p-button-danger"
+              aria-label="Next"
+              onClick={() => nextPage()}
+              label={"Siguiente"}
+            />
+          </div>
+          <div className="flex-1 flex align-items-center justify-content-start sm:hidden">
+            <Button
+              icon="pi pi-angle-left"
+              className="p-button-rounded p-button-sm p-button-danger"
+              aria-label="Back"
+              onClick={() => previousPage()}
+            />
+          </div>
+          <div className="flex-1 flex align-items-center justify-content-center sm:hidden">
+            <h3 className={"text-center"}>Revisión mecánica</h3>
+          </div>
+          <div className="flex-1 flex align-items-center justify-content-end sm:hidden">
+            <Button
+              icon="pi pi-angle-right"
+              className="p-button-rounded p-button-sm p-button-danger"
+              aria-label="Next"
+              onClick={() => nextPage()}
             />
           </div>
         </div>
-      </div>
-      <Button
-        icon="pi pi-angle-left"
-        className="p-button-rounded p-button-danger left-button"
-        aria-label="Back"
-        onClick={() => previousPage()}
-      />
 
+        <div className={"p-fluid grid"}>
+          <div className="col-12 md:col-1 lg:col-2"></div>
+          <div className="col-12 md:col-4 lg:col-3">
+
+            <div className={'py-2 px-4 border-round bg-gray-300'}>
+              <div>
+                <p className={"text-base"}>
+                  Seleccioná las <strong>fechas estimadas</strong> donde vos
+                  tengas tiempo libre para realizar la revisión de tu auto.
+                </p>
+              </div>
+              <div>
+                <p className={"text-base"}>
+                  La misma será coordinada mas tarde por nuestro equipo con datos de contacto.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="field flex-wrap col-12 md:col-6 lg:col-4">
+            <Calendar
+              value={multipleDates}
+              onChange={(e) => {
+                setFormData({...formData, availableRevisionDates: e.value})
+                setMultipleDates(e.value);
+              }}
+              selectionMode="multiple"
+              disabledDays={[0]}
+              disabledDates={invalidDates}
+              minDate={minDate}
+              maxDate={maxDate}
+              className={"input-grande"}
+              inline
+            />
+          </div>
+          <div className="col-12 md:col-1 lg:col-3"></div>
+        </div>
+      </div>
     </>
   );
 }
