@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --font-family: 'Raleway', sans-serif;
+    --mah-colour: #E21F25;
+    --primary-color: var(--mah-colour);
+    --font-size: 90%
+}
+
+body {
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: var(--font-size);
+}
+
+.p-component {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+}
