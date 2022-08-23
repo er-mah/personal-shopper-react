@@ -1,6 +1,6 @@
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { MAIN_URLS, NEW_SALE_FORM_URLS } from "../../utils/constants";
 import { SellCarContext } from "../../contexts";
@@ -8,8 +8,13 @@ import VehicleService from "../../services/vehicle.service";
 import { TabPanel, TabView } from "primereact/tabview";
 import { Image } from "primereact/image";
 import { ProgressSpinner } from "primereact/progressspinner";
+import FormHeader from "./formHeader";
+import FormFooter from "./formFooter";
 
 export function VehicleSpecs({ step, setStep }) {
+  let navigate = useNavigate();
+  let title = "Especificaciones técnicas";
+
   // Get information from context
   const [formData, setFormData, quotationInfo, setQuotationInfo] =
     useContext(SellCarContext);
@@ -24,8 +29,7 @@ export function VehicleSpecs({ step, setStep }) {
   const [imageUrl, setImageUrl] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
-
-  let navigate = useNavigate();
+  let isNextPageValid = true;
 
   const previousPage = () => {
     navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL);
@@ -40,7 +44,7 @@ export function VehicleSpecs({ step, setStep }) {
     setLoading(true);
 
     if (formData.brandId == null) {
-      navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL)
+      navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.MODEL);
     }
 
     setStep(4); // Set progress bar status
@@ -53,11 +57,9 @@ export function VehicleSpecs({ step, setStep }) {
       setCarBrand(res.data.data.brand);
       setCarModel(res.data.data.model);
       setImageUrl(res.data.data.photo_url);
-    });
-
-    setTimeout(function () {
+    }).finally(() => {
       setLoading(false);
-    }, 2000);
+    });
   }, []);
 
   const descriptionTemplate = (feature) => {
@@ -87,116 +89,92 @@ export function VehicleSpecs({ step, setStep }) {
       </div>
     );
   };
-
   return (
-    <div className={"px-4"}>
+    <div>
       {isLoading ? (
         <>
           <ProgressSpinner className={"center-spinner"} />
         </>
       ) : (
         <>
-          <div className="flex my-3">
-            <div className="flex-1 sm:flex align-items-center justify-content-start hidden">
-              <Button
-                icon="pi pi-angle-left"
-                className="p-button-rounded p-button-sm p-button-danger "
-                aria-label="Back"
-                onClick={() => previousPage()}
-                label={"Atrás"}
-              />
-            </div>
-            <div className="flex-1 sm:flex align-items-center justify-content-center hidden">
-              <h2 className={"hidden sm:flex"}>Especificaciones técnicas</h2>
-            </div>
-            <div className="flex-1 sm:flex align-items-center justify-content-end hidden">
-              <Button
-                icon="pi pi-angle-right"
-                className="p-button-rounded p-button-sm p-button-danger"
-                aria-label="Next"
-                onClick={() => nextPage()}
-                label={"Siguiente"}
-              />
-            </div>
-            <div className="flex-1 flex align-items-center justify-content-start sm:hidden">
-              <Button
-                icon="pi pi-angle-left"
-                className="p-button-rounded p-button-sm p-button-danger"
-                aria-label="Back"
-                onClick={() => previousPage()}
-              />
-            </div>
-            <div className="flex-1 flex align-items-center justify-content-center sm:hidden">
-              <h3>Especificaciones</h3>
-            </div>
-            <div className="flex-1 flex align-items-center justify-content-end sm:hidden">
-              <Button
-                icon="pi pi-angle-right"
-                className="p-button-rounded p-button-sm p-button-danger"
-                aria-label="Next"
-                onClick={() => nextPage()}
-              />
-            </div>
-          </div>
-          <h3 className={"hidden sm:flex"}>{carBrand} {carModel}</h3>
-          <div className={"grid"}>
-            <div className={"col-12 md:col-9"}>
-              <TabView>
-                <TabPanel header="Comfort">
-                  <div className={"grid"}>
-                    {comfort !== null ? (
-                      comfort.map((feature) => {
-                        return <>{descriptionTemplate(feature)}</>;
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </TabPanel>
-                <TabPanel header="Datos técnicos">
-                  <div className={"grid"}>
-                    {technicalInfo !== null ? (
-                      technicalInfo.map((feature) => {
-                        return <>{descriptionTemplate(feature)}</>;
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </TabPanel>
-                <TabPanel header="Motor y transmisión">
-                  <div className={"grid"}>
-                    {engineAndTransmission !== null ? (
-                      engineAndTransmission.map((feature) => {
-                        return <>{descriptionTemplate(feature)}</>;
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </TabPanel>
-                <TabPanel header="Seguridad">
-                  <div className={"grid"}>
-                    {security !== null ? (
-                      security.map((feature) => {
-                        return <>{descriptionTemplate(feature)}</>;
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </TabPanel>
-              </TabView>
-            </div>
-            <div className={"col-12 md:col-3"}>
-              <div className={'flex justify-content-center'}>
-                <h4>Imagen de referencia</h4>
+          {/* Buttons */}
+          <FormHeader
+            back={() => previousPage()}
+            next={() => nextPage()}
+            isNextPageValid={isNextPageValid}
+            title={title}
+          />
+          <div className={'mx-3'}>
+            <h3 className={"flex align-items-center justify-content-center my-1"}>
+              {carBrand} {carModel}
+            </h3>
+            <div className={"grid"}>
+              <div className={"col-12 md:col-9"}>
+                <TabView>
+                  <TabPanel header="Comfort">
+                    <div className={"grid"}>
+                      {comfort !== null ? (
+                          comfort.map((feature) => {
+                            return <>{descriptionTemplate(feature)}</>;
+                          })
+                      ) : (
+                          <></>
+                      )}
+                    </div>
+                  </TabPanel>
+                  <TabPanel header="Datos técnicos">
+                    <div className={"grid"}>
+                      {technicalInfo !== null ? (
+                          technicalInfo.map((feature) => {
+                            return <>{descriptionTemplate(feature)}</>;
+                          })
+                      ) : (
+                          <></>
+                      )}
+                    </div>
+                  </TabPanel>
+                  <TabPanel header="Motor y transmisión">
+                    <div className={"grid"}>
+                      {engineAndTransmission !== null ? (
+                          engineAndTransmission.map((feature) => {
+                            return <>{descriptionTemplate(feature)}</>;
+                          })
+                      ) : (
+                          <></>
+                      )}
+                    </div>
+                  </TabPanel>
+                  <TabPanel header="Seguridad">
+                    <div className={"grid"}>
+                      {security !== null ? (
+                          security.map((feature) => {
+                            return <>{descriptionTemplate(feature)}</>;
+                          })
+                      ) : (
+                          <></>
+                      )}
+                    </div>
+                  </TabPanel>
+                </TabView>
               </div>
-              <div className={'flex justify-content-center'}>
-                <Image src={imageUrl} downloadable={false} width={250} />
+              <div className={"col-12 md:col-3"}>
+                <div className={"flex justify-content-center"}>
+                  <h4>Imagen de referencia</h4>
+                </div>
+                <div className={"flex justify-content-center"}>
+                  <Image src={imageUrl} downloadable={false} width={'100%'} />
+                </div>
               </div>
             </div>
           </div>
+
+          <FormFooter
+              className={'pb-7'}
+              back={() => previousPage()}
+              next={() => nextPage()}
+              isNextPageValid={isNextPageValid}
+              title={title}
+          />
         </>
       )}
     </div>

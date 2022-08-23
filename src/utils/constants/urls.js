@@ -23,4 +23,15 @@ export const CALL_TO_ACTION_URLS = {
     CAR_INSURANCES: 'https://www.miautohoy.com.ar/seguros'
 }
 
+export const MAH_URLS = {
+    HOME: 'https://www.miautohoy.com.ar/',
+    CAR_CREDITS: 'https://www.miautohoy.com.ar/creditos',
+    CAR_CREDITS_SIMULATION: 'https://www.miautohoy.com.ar/simulador-credito',
+    CAR_INSURANCES: 'https://www.miautohoy.com.ar/seguros',
+    QUALITY_LEADS: 'https://www.miautohoy.com.ar/concesionarios',
+    COMMUNICATION_CHANNEL: 'https://www.miautohoy.com.ar/contacto',
+    MARKETPLACE: 'https://www.miautohoy.com.ar/usados',
+    BLOG_POSTS: 'https://www.miautohoy.com.ar/usados/blog/',
+}
+
 export const WHATSAPP_CONTACT_URL = "https://wa.link/yo7e47"

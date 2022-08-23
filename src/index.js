@@ -4,6 +4,7 @@ import "primeicons/primeicons.css"; // icons
 import "primeflex/primeflex.css"; // primeflex css
 import "primeflex/primeflex.min.css"; // primeflex css
 import "./utils/styles/index.css";
+import "./utils/styles/components.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
