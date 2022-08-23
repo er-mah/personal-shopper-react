@@ -39,7 +39,7 @@ export function Start({ setStep }) {
                 de manera inmediata
               </div>
               <p className="mt-0 mb-4 text-700 line-height-3">
-                Sólo necesitamos que nos dejes algunos datos para que te contactemos
+                Sólo necesitamos que nos dejes tus datos para poder contactarte
               </p>
 
               <Button
