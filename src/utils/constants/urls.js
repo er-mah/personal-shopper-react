@@ -32,6 +32,7 @@ export const MAH_URLS = {
     COMMUNICATION_CHANNEL: 'https://www.miautohoy.com.ar/contacto',
     MARKETPLACE: 'https://www.miautohoy.com.ar/usados',
     BLOG_POSTS: 'https://www.miautohoy.com.ar/usados/blog/',
+    PUBLISH_CAR: 'https://www.miautohoy.com.ar/usados/publicar/'
 }
 
 export const WHATSAPP_CONTACT_URL = "https://wa.link/yo7e47"
