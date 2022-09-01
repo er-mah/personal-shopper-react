@@ -44,6 +44,14 @@ export function VehicleRevision({_step, setStep}) {
     setIsNextPageValid(false);
   };
 
+  const storeDatesAsString = (dates) => {
+    let formattedDates = []
+    dates.map((date) => {
+      formattedDates.push(date.toLocaleDateString());
+    });
+    return formattedDates;
+  }
+
   // When component is rendered
   useEffect(() => {
     setStep(7); // Set progress bar status
@@ -97,6 +105,7 @@ export function VehicleRevision({_step, setStep}) {
                     setFormData({
                       ...formData,
                       availableRevisionDates: $event.value,
+                      revisionDates: storeDatesAsString($event.value)
                     });
                     setMultipleDates($event.value);
                     if ($event.value.length === 0) {

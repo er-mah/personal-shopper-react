@@ -9,13 +9,13 @@ import {
   OWNER_OPTIONS,
 } from "../../utils/constants";
 import { InputText } from "primereact/inputtext";
-import VehicleService from "../../services/vehicle.service";
 import { INSTITUTIONAL } from "../../utils/assets/institutional";
 import FormHeader from "./formHeader";
 import FormFooter from "./formFooter";
+import UserService from "../../services/user.service";
 
 export function Owner({ _step, setStep }) {
-  let service = new VehicleService();
+  let service = new UserService();
   let title = "Datos del propietario";
 
   const [sex, setSex] = useState(undefined);
@@ -126,19 +126,19 @@ export function Owner({ _step, setStep }) {
               {/* DNI */}
               <div className="field col-6 my-2">
                 <span className="p-float-label">
-                  {formData.ownerSex === undefined ? (
+                  {formData.ownerSex == null || !(formData.ownerSex) ? (
                     <>
                       <InputNumber
                         inputId="dni"
                         autoComplete={"off"}
                         value={dni}
-                        className={"surface-400 border-round"}
+                        className={"surface-200 border-round"}
                         onValueChange={($event) => {
                           setDni($event.value);
                           setFormData({ ...formData, ownerDni: $event.value });
                           setOwnerName($event.value, sex);
                         }}
-                        disabled
+                        disabled={true}
                       />
                     </>
                   ) : (
@@ -169,9 +169,8 @@ export function Owner({ _step, setStep }) {
                       <InputText
                         autoComplete={"off"}
                         id="fullName"
-                        readOnly={true}
                         value={fullName}
-                        className={"surface-300 border-round"}
+                        className={"surface-200 border-round"}
                         disabled
                       />
                     </>

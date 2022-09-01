@@ -38,14 +38,14 @@ export function Start({ setStep }) {
               <div className="text-6xl text-primary font-bold mb-3">
                 de manera inmediata
               </div>
-              <p className="mt-0 mb-4 text-700 line-height-3">
+              <p className="mt-0 mb-4 text-xl line-height-3">
                 Sólo necesitamos que nos dejes tus datos para poder contactarte
               </p>
 
               <Button
                   label="Iniciar formulario"
                   type="button"
-                  className="mr-3 p-button-danger p-button-raised"
+                  className="mr-3 p-button-danger p-button-lg p-button-raised"
                   onClick={() => nextPage()}
               />
             </section>
