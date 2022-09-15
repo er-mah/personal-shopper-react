@@ -25,11 +25,6 @@ export function NextSteps({ step, setStep }) {
   };
 
   const nextPage = () => {
-    setDataToApi({
-      ...dataToApi,
-      saleType: formData.saleType,
-    });
-    console.log("data to api: ", dataToApi);
     service.persistForm(dataToApi).finally(() => {
       if (selectedOption === 3) {
         window.location.replace(MAH_URLS.PUBLISH_CAR);
@@ -39,6 +34,10 @@ export function NextSteps({ step, setStep }) {
   };
 
   function setOption(saleType) {
+    setDataToApi({
+      ...dataToApi,
+      saleType: saleType,
+    });
     if (saleType === "Compra inmediata") {
       setSelectedOption(1);
     } else if (saleType === "Personal seller") {
@@ -125,6 +124,10 @@ export function NextSteps({ step, setStep }) {
                   onClick={() => {
                     setSelectedOption(1);
                     setFormData({ ...formData, saleType: "Compra inmediata" });
+                    setDataToApi({
+                      ...dataToApi,
+                      saleType: "Compra inmediata",
+                    });
                   }}
                 >
                   <div className="p-card-title ">
@@ -164,6 +167,10 @@ export function NextSteps({ step, setStep }) {
                   onClick={() => {
                     setSelectedOption(2);
                     setFormData({ ...formData, saleType: "Personal seller" });
+                    setDataToApi({
+                      ...dataToApi,
+                      saleType: "Personal seller",
+                    });
                   }}
                 >
                   <div className="p-card-title ">
@@ -204,6 +211,10 @@ export function NextSteps({ step, setStep }) {
                     setSelectedOption(3);
                     setFormData({
                       ...formData,
+                      saleType: "Publicación gratuita",
+                    });
+                    setDataToApi({
+                      ...dataToApi,
                       saleType: "Publicación gratuita",
                     });
                   }}
