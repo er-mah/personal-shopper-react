@@ -15,7 +15,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import FormHeader from "./formHeader";
 import FormFooter from "./formFooter";
 
-export function Model({ step, setStep }) {
+export function Model({ _step, setStep }) {
   let title = "Buscá tu auto";
 
   let navigate = useNavigate();
@@ -111,7 +111,7 @@ export function Model({ step, setStep }) {
       .finally(() => {
         setLoading(false);
       });
-  }, [formData, mainBrands, navigate, setStep, vehicleService, loadDataFromContext ]);
+  }, [formData]);
 
   function selectYear(year) {
     setSelectedModelId(null);
@@ -125,8 +125,6 @@ export function Model({ step, setStep }) {
       setModelsFromApi(res.data.data);
     });
   }
-
-  function selectModelFromDropdown(e) {}
 
   return (
     <div>
@@ -333,7 +331,6 @@ export function Model({ step, setStep }) {
                   style={{ textDecoration: "none" }}
                   href={WHATSAPP_CONTACT_URL}
                   target="_blank"
-                  rel="noreferrer"
               >
                 <Button
                     key={"whatsapp"}
