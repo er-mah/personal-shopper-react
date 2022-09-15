@@ -111,7 +111,7 @@ export function Model({ step, setStep }) {
       .finally(() => {
         setLoading(false);
       });
-  }, [formData]);
+  }, [formData, mainBrands, navigate, setStep, vehicleService, loadDataFromContext ]);
 
   function selectYear(year) {
     setSelectedModelId(null);
@@ -333,6 +333,7 @@ export function Model({ step, setStep }) {
                   style={{ textDecoration: "none" }}
                   href={WHATSAPP_CONTACT_URL}
                   target="_blank"
+                  rel="noreferrer"
               >
                 <Button
                     key={"whatsapp"}
