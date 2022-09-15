@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import {Link, useNavigate} from "react-router-dom";
 import {CALL_TO_ACTION_URLS} from "../../utils/constants";
 
 export function FormComplete({ _step, setStep }) {
@@ -7,7 +6,7 @@ export function FormComplete({ _step, setStep }) {
   // When component is rendered
   useEffect(() => {
     setStep(9); // Set progress bar status
-  }, []);
+  }, [setStep]);
 
   const redirectPage = (url) => {
     window.location.replace(url);
