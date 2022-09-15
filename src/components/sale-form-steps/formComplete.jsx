@@ -6,7 +6,7 @@ export function FormComplete({ _step, setStep }) {
   // When component is rendered
   useEffect(() => {
     setStep(9); // Set progress bar status
-  }, [setStep]);
+  }, []);
 
   const redirectPage = (url) => {
     window.location.replace(url);
