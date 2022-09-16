@@ -22,6 +22,8 @@ export function Quotation({ step, setStep }) {
   const [otherPrices, setOtherPrices] = useState(null);
   const [baseValue, setBaseValue] = useState(null);
 
+  const [dealData, setDealData] = useState({});
+
   const [isLoading, setLoading] = useState(true);
 
   let navigate = useNavigate();
@@ -40,8 +42,50 @@ export function Quotation({ step, setStep }) {
     navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
   };
 
+  const storeInfo = async (payload) => {
+    vecicleService.getQuotation(payload).then((res) => {
+      setMinValue(res.data.data.minValue);
+      setMaxValue(res.data.data.maxValue);
+      setOtherPrices(res.data.data.agenciesPrices);
+      setBaseValue((res.data.data.minValue + res.data.data.maxValue) / 2);
+
+      personalShopperService
+        .persistDeal({
+          ownerCuil: formData.ownerCuil,
+          ownerDni: formData.ownerDni,
+          ownerEmail: formData.ownerEmail,
+          ownerName: formData.ownerName,
+          ownerPhone: formData.ownerTelephone,
+          ownerPostalCode: formData.ownerPostalCode,
+          ownerSex: formData.ownerSex,
+          saleBaseQuotationValue:
+            (res.data.data.minValue + res.data.data.maxValue) / 2,
+          saleCurrency: formData.currency,
+          saleQuotationRange:
+            res.data.data.minValue + " - " + res.data.data.maxValue,
+          saleRequestedAmount: formData.amount,
+          saleUrgency: formData.urgency,
+          vehicleBrand: formData.brandName,
+          vehicleColor: formData.colour,
+          vehicleComments: formData.comments,
+          vehicleKilometers: formData.kilometers,
+          vehicleLicensePlate: formData.licensePlate,
+          vehicleModel: formData.modelName,
+          vehicleState: formData.state,
+          vehicleVersion: formData.versionName,
+          vehicleYear: formData.year,
+        })
+        .then((res) => {
+          setFormData({ ...formData, dealId: res.data.data.id });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
+  };
+
   // When component is rendered
-  useEffect(() => {
+  useEffect( () => {
     setLoading(true);
 
     if (quotationInfo.colourCategory == null) {
@@ -59,47 +103,7 @@ export function Quotation({ step, setStep }) {
       year: quotationInfo.year,
     };
 
-    vecicleService
-      .getQuotation(payload)
-      .then((res) => {
-        setMinValue(res.data.data.minValue);
-        setMaxValue(res.data.data.maxValue);
-        setOtherPrices(res.data.data.agenciesPrices);
-        setBaseValue((res.data.data.minValue + res.data.data.maxValue) / 2);
-      })
-      .finally(() => {
-        personalShopperService
-          .persistDeal({
-            ownerCuil: formData.ownerCuil,
-            ownerDni: formData.ownerDni,
-            ownerEmail: formData.ownerEmail,
-            ownerName: formData.ownerName,
-            ownerPhone: formData.ownerTelephone,
-            ownerPostalCode: formData.ownerPostalCode,
-            ownerSex: formData.ownerSex,
-            saleBaseQuotationValue: baseValue,
-            saleCurrency: formData.currency,
-            saleQuotationRange:
-                minValue + " - " + maxValue,
-            saleRequestedAmount: formData.amount,
-            saleUrgency: formData.urgency,
-            vehicleBrand: formData.brandName,
-            vehicleColor: formData.colour,
-            vehicleComments: formData.comments,
-            vehicleKilometers: formData.kilometers,
-            vehicleLicensePlate: formData.licensePlate,
-            vehicleModel: formData.modelName,
-            vehicleState: formData.state,
-            vehicleVersion: formData.versionName,
-            vehicleYear: formData.year,
-          })
-          .then((res) => {
-            setFormData({ ...formData, dealId: res.data.data.id });
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      });
+    storeInfo(payload);
   }, []);
 
   return (
