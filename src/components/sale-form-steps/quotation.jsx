@@ -68,13 +68,6 @@ export function Quotation({ step, setStep }) {
         setBaseValue((res.data.data.minValue + res.data.data.maxValue) / 2);
       })
       .finally(() => {
-        setFormData({
-          ...formData,
-          quotationMinValue: minValue,
-          quotationMaxValue: maxValue,
-          quotationBaseValue: baseValue,
-        });
-
         personalShopperService
           .persistDeal({
             ownerCuil: formData.ownerCuil,
@@ -84,10 +77,10 @@ export function Quotation({ step, setStep }) {
             ownerPhone: formData.ownerTelephone,
             ownerPostalCode: formData.ownerPostalCode,
             ownerSex: formData.ownerSex,
-            saleBaseQuotationValue: formData.quotationBaseValue,
+            saleBaseQuotationValue: baseValue,
             saleCurrency: formData.currency,
             saleQuotationRange:
-              formData.quotationMinValue + " - " + formData.quotationMaxValue,
+                minValue + " - " + maxValue,
             saleRequestedAmount: formData.amount,
             saleUrgency: formData.urgency,
             vehicleBrand: formData.brandName,
