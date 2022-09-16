@@ -31,11 +31,7 @@ export function Quotation({step, setStep}) {
   };
 
   const nextPage = () => {
-    personalShopperService.persistDeal(dataToApi).then((res) => {
-      setFormData({...formData, dealId: res.data.data.id});
-    }).finally((res) => {
-      navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
-    });
+    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
   };
 
   // When component is rendered
@@ -82,14 +78,10 @@ export function Quotation({step, setStep}) {
             ownerSex: formData.ownerSex,
             saleBaseQuotationValue: formData.quotationBaseValue,
             saleCurrency: formData.currency,
-            // TODO: DELETE
-            // saleMechanicalRevisionDates: formData.revisionDates,
             saleQuotationRange:
                 formData.quotationMinValue + " - " + formData.quotationMaxValue,
             saleRequestedAmount: formData.amount,
             saleUrgency: formData.urgency,
-            // TODO: DELETE
-            // saleType: formData.saleType,
             vehicleBrand: formData.brandName,
             vehicleColor: formData.colour,
             vehicleComments: formData.comments,
@@ -103,6 +95,9 @@ export function Quotation({step, setStep}) {
         })
         .finally(() => {
           setLoading(false);
+          personalShopperService.persistDeal(dataToApi).then((res) => {
+            setFormData({...formData, dealId: res.data.data.id});
+          });
         });
   }, []);
 
