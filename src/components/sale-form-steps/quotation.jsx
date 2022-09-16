@@ -2,13 +2,15 @@ import {useNavigate} from "react-router-dom";
 import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../../utils/constants";
 import React, {useContext, useEffect, useState} from "react";
 import {SellCarContext} from "../../contexts";
-import VehicleService from "../../services/vehicle.service";
 import {ProgressSpinner} from "primereact/progressspinner";
 import FormHeader from "./formHeader";
 import FormFooter from "./formFooter";
+import PersonalShopperService from "../../services/personal-shopper.service";
+import VehicleService from "../../services/vehicle.service";
 
 export function Quotation({step, setStep}) {
-  let service = new VehicleService();
+  let vecicleService = new VehicleService();
+  let personalShopperService = new PersonalShopperService();
 
   let isNextPageValid = true;
   let title = "Cotización tu vehículo";
@@ -18,6 +20,7 @@ export function Quotation({step, setStep}) {
   const [minValue, setMinValue] = useState(null);
   const [maxValue, setMaxValue] = useState(null);
   const [otherPrices, setOtherPrices] = useState(null);
+  const [dataToApi, setDataToApi] = useState({});
 
   const [isLoading, setLoading] = useState(true);
 
@@ -28,7 +31,11 @@ export function Quotation({step, setStep}) {
   };
 
   const nextPage = () => {
-    navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
+    personalShopperService.persistDeal(dataToApi).then((res) => {
+      setFormData({...formData, dealId: res.data.data.id});
+    }).finally((res) => {
+      navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
+    });
   };
 
   // When component is rendered
@@ -50,20 +57,53 @@ export function Quotation({step, setStep}) {
       year: quotationInfo.year,
     };
 
-    service.getQuotation(payload).then((res) => {
-      setMinValue(res.data.data.minValue);
-      setMaxValue(res.data.data.maxValue);
-      setOtherPrices(res.data.data.agenciesPrices);
-      setFormData({
-        ...formData,
-        quotationMinValue: res.data.data.minValue,
-        quotationMaxValue: res.data.data.maxValue,
-        quotationBaseValue:
-            (res.data.data.minValue + res.data.data.maxValue) / 2,
-      })
-    }).finally(() => {
-      setLoading(false);
-    });;
+    vecicleService
+        .getQuotation(payload)
+        .then((res) => {
+          setMinValue(res.data.data.minValue);
+          setMaxValue(res.data.data.maxValue);
+          setOtherPrices(res.data.data.agenciesPrices);
+          setFormData({
+            ...formData,
+            quotationMinValue: res.data.data.minValue,
+            quotationMaxValue: res.data.data.maxValue,
+            quotationBaseValue:
+                (res.data.data.minValue + res.data.data.maxValue) / 2,
+          });
+
+          setDataToApi({
+            ...dataToApi,
+            ownerCuil: formData.ownerCuil,
+            ownerDni: formData.ownerDni,
+            ownerEmail: formData.ownerEmail,
+            ownerName: formData.ownerName,
+            ownerPhone: formData.ownerTelephone,
+            ownerPostalCode: formData.ownerPostalCode,
+            ownerSex: formData.ownerSex,
+            saleBaseQuotationValue: formData.quotationBaseValue,
+            saleCurrency: formData.currency,
+            // TODO: DELETE
+            // saleMechanicalRevisionDates: formData.revisionDates,
+            saleQuotationRange:
+                formData.quotationMinValue + " - " + formData.quotationMaxValue,
+            saleRequestedAmount: formData.amount,
+            saleUrgency: formData.urgency,
+            // TODO: DELETE
+            // saleType: formData.saleType,
+            vehicleBrand: formData.brandName,
+            vehicleColor: formData.colour,
+            vehicleComments: formData.comments,
+            vehicleKilometers: formData.kilometers,
+            vehicleLicensePlate: formData.licensePlate,
+            vehicleModel: formData.modelName,
+            vehicleState: formData.state,
+            vehicleVersion: formData.versionName,
+            vehicleYear: formData.year,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
   }, []);
 
   return (
@@ -133,7 +173,6 @@ export function Quotation({step, setStep}) {
                   </div>
                 </div>
               </div>
-
 
               <FormFooter
                   className={"pb-7"}

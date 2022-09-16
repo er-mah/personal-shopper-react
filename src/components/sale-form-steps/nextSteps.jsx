@@ -16,7 +16,7 @@ export function NextSteps({ step, setStep }) {
     useContext(SellCarContext);
 
   const [selectedOption, setSelectedOption] = useState(undefined);
-  const [dataToApi, setDataToApi] = useState({});
+  const [saleType, setSaleType] = useState("");
 
   let isNextPageValid = selectedOption !== undefined;
 
@@ -25,7 +25,7 @@ export function NextSteps({ step, setStep }) {
   };
 
   const nextPage = () => {
-    service.persistForm(dataToApi).finally(() => {
+    service.addSaleTypeToDeal(saleType, formData.dealId).finally(() => {
       if (selectedOption === 3) {
         window.location.replace(MAH_URLS.PUBLISH_CAR);
       }
@@ -34,10 +34,6 @@ export function NextSteps({ step, setStep }) {
   };
 
   function setOption(saleType) {
-    setDataToApi({
-      ...dataToApi,
-      saleType: saleType,
-    });
     if (saleType === "Compra inmediata") {
       setSelectedOption(1);
     } else if (saleType === "Personal seller") {
@@ -49,33 +45,6 @@ export function NextSteps({ step, setStep }) {
 
   const loadDataFromContext = () => {
     setOption(formData.saleType);
-    setDataToApi({
-      ...dataToApi,
-      ownerCuil: formData.ownerCuil,
-      ownerDni: formData.ownerDni,
-      ownerEmail: formData.ownerEmail,
-      ownerName: formData.ownerName,
-      ownerPhone: formData.ownerTelephone,
-      ownerPostalCode: formData.ownerPostalCode,
-      ownerSex: formData.ownerSex,
-      saleBaseQuotationValue: formData.quotationBaseValue,
-      saleCurrency: formData.currency,
-      saleMechanicalRevisionDates: formData.revisionDates,
-      saleQuotationRange:
-        formData.quotationMinValue + " - " + formData.quotationMaxValue,
-      saleRequestedAmount: formData.amount,
-      saleUrgency: formData.urgency,
-      saleType: formData.saleType,
-      vehicleBrand: formData.brandName,
-      vehicleColor: formData.colour,
-      vehicleComments: formData.comments,
-      vehicleKilometers: formData.kilometers,
-      vehicleLicensePlate: formData.licensePlate,
-      vehicleModel: formData.modelName,
-      vehicleState: formData.state,
-      vehicleVersion: formData.versionName,
-      vehicleYear: formData.year,
-    });
   };
 
   // When component is rendered
@@ -124,8 +93,7 @@ export function NextSteps({ step, setStep }) {
                   onClick={() => {
                     setSelectedOption(1);
                     setFormData({ ...formData, saleType: "Compra inmediata" });
-                    setDataToApi({
-                      ...dataToApi,
+                    setSaleType({
                       saleType: "Compra inmediata",
                     });
                   }}
@@ -167,8 +135,7 @@ export function NextSteps({ step, setStep }) {
                   onClick={() => {
                     setSelectedOption(2);
                     setFormData({ ...formData, saleType: "Personal seller" });
-                    setDataToApi({
-                      ...dataToApi,
+                    setSaleType({
                       saleType: "Personal seller",
                     });
                   }}
@@ -213,8 +180,7 @@ export function NextSteps({ step, setStep }) {
                       ...formData,
                       saleType: "Publicación gratuita",
                     });
-                    setDataToApi({
-                      ...dataToApi,
+                    setSaleType({
                       saleType: "Publicación gratuita",
                     });
                   }}
