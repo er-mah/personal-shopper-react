@@ -104,7 +104,6 @@ export function Quotation({ step, setStep }) {
             setFormData({ ...formData, dealId: res.data.data.id });
           })
           .finally(() => {
-            console.log(formData);
             setLoading(false);
           });
       });
