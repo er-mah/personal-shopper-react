@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 :root {
-    --font-family: 'Raleway', sans-serif;
-    --mah-colour: #E21F25;
-    --primary-color: var(--mah-colour);
-    --font-size: 90%
+    --font-family: 'Montserrat', sans-serif;
+    --techmo-colour: #28E0CC;
+    --primary-color: var(--techmo-colour);
+    --font-size: 100%
 }
 
 body {

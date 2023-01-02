@@ -19,35 +19,38 @@ export function Start({ setStep }) {
   return (
     <>
       <div className="grid grid-nogutter surface-0 text-800">
-        <div className="col-12 md:col-5 overflow-hidden">
-          <div className="md:ml-auto block md:h-full">
+        <div className="col-12 md:col-6 overflow-hidden">
+          <div className="flex align-content-center md:ml-auto block md:h-full p-6">
             <img
-                src={INSTITUTIONAL.VERTE_LLEGAR}
-                alt="hero-1"
-                style={{
-                  clipPath: "polygon(0 0, 90% 0, 100% 100%, 0% 100%)",
-                  width: "100%",
-                }}
+              src={INSTITUTIONAL.START}
+              alt="hero-1"
+              style={{
+                width: "100%",
+              }}
             />
           </div>
         </div>
-        <div className="col-12 md:col-7 p-6 text-center md:text-right flex align-items-center justify-content-center">
-          <div className={'flex align-items-end'}>
+        <div className="col-12 md:col-6 p-6 text-center md:text-right flex align-items-center justify-content-start">
+          <div className="flex">
             <section>
-              <span className="block text-6xl font-bold mb-1">Vendé tu auto</span>
-              <div className="text-6xl text-primary font-bold mb-3">
+              <span className="block text-left text-6xl font-bold mb-1">
+                Vendé tu auto
+              </span>
+              <div className="text-6xl text-left text-primary font-bold mb-3">
                 de manera inmediata
               </div>
               <p className="mt-0 mb-4 text-xl line-height-3">
                 Sólo necesitamos que nos dejes tus datos para poder contactarte
               </p>
+              <div className="text-right mt-5">
+                <Button
+                    label="Iniciar Personal Shopper"
+                    type="button"
+                    className="p-button-techmo p-button-lg p-button-raised"
+                    onClick={() => nextPage()}
+                />
+              </div>
 
-              <Button
-                  label="Iniciar formulario"
-                  type="button"
-                  className="mr-3 p-button-danger p-button-lg p-button-raised"
-                  onClick={() => nextPage()}
-              />
             </section>
           </div>
         </div>

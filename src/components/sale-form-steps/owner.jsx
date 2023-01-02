@@ -90,6 +90,9 @@ export function Owner({ _step, setStep }) {
       <div className={"flex align-items-center justify-content-center"}>
         <div className="grid grid-nogutter">
           <div className="col-12 md:col-7 px-5">
+            <div className={"flex align-items-center justify-content-center mb-4"}>
+              <span className="bg-teal-100 px-4 py-3 border-round-2xl mx-5 text-center">⚠️{"   "}Tené en cuenta que el campo "Nombre completo" se llena automáticamente. Además, el campo "DNI" se habilita cuando definís el sexo.</span>
+            </div>
             <div className="p-fluid grid">
               {/* SEXO */}
               <div className="field col-6 my-2">
@@ -126,13 +129,12 @@ export function Owner({ _step, setStep }) {
               {/* DNI */}
               <div className="field col-6 my-2">
                 <span className="p-float-label">
-                  {formData.ownerSex == null || !(formData.ownerSex) ? (
+                  {typeof formData.ownerSex === "undefined" ? (
                     <>
                       <InputNumber
                         inputId="dni"
                         autoComplete={"off"}
                         value={dni}
-                        className={"surface-200 border-round"}
                         onValueChange={($event) => {
                           setDni($event.value);
                           setFormData({ ...formData, ownerDni: $event.value });
@@ -170,17 +172,16 @@ export function Owner({ _step, setStep }) {
                         autoComplete={"off"}
                         id="fullName"
                         value={fullName}
-                        className={"surface-200 border-round"}
-                        disabled
+                        disabled={true}
                       />
                     </>
                   ) : (
                     <>
                       <InputText
-                          autoComplete={"off"}
-                          id="fullName"
-                          readOnly={true}
-                          value={fullName}
+                        autoComplete={"off"}
+                        id="fullName"
+                        value={fullName}
+                        readOnly={true}
                       />
                     </>
                   )}
@@ -234,7 +235,7 @@ export function Owner({ _step, setStep }) {
               </div>
 
               {/* POSTAL CODE */}
-              <div className="field col-6 my-2">
+              <div className="field col-6 my-2 ">
                 <span className="p-float-label">
                   <InputText
                     autoComplete={"off"}
@@ -253,13 +254,6 @@ export function Owner({ _step, setStep }) {
                 </span>
               </div>
             </div>
-
-            <FormFooter
-                back={() => previousPage()}
-                next={() => nextPage()}
-                isNextPageValid={isNextPageValid}
-                title={title}
-            />
           </div>
 
           <div className="col-12 md:col-5 overflow-hidden">
@@ -268,7 +262,6 @@ export function Owner({ _step, setStep }) {
                 src={INSTITUTIONAL.OWNER}
                 alt="hero-1"
                 style={{
-                  clipPath: "polygon(8% 0, 100% 0%, 100% 100%, 0 100%)",
                   width: "100%",
                 }}
               />
@@ -276,6 +269,8 @@ export function Owner({ _step, setStep }) {
           </div>
         </div>
       </div>
+
+
     </div>
   );
 }

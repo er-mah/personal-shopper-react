@@ -1,12 +1,12 @@
-import logoConTexto from './logo-con-texto.svg'
-import logo from './mah-logo.svg'
-import verteLlegar from './verte-llegar.jpg'
-import owner from './owner.jpg'
+import logoConTexto from './techmo-texto.svg'
+import logo from './techmo-simple.svg'
+import hero from './auto-hero.png'
+import owner from './owner.png'
 
 export const INSTITUTIONAL = {
     LOGO_CON_TEXTO: logoConTexto,
     LOGO_SOLO: logo,
-    VERTE_LLEGAR: verteLlegar,
+    START: hero,
     OWNER: owner,
 }
 

@@ -48,18 +48,21 @@ export function VehicleSpecs({ step, setStep }) {
     }
 
     setStep(4); // Set progress bar status
-    new VehicleService().getDetailedInfo(quotationInfo.codia).then((res) => {
-      setComfort(res.data.data.comfort);
-      setTechnicalInfo(res.data.data.technical_info);
-      setEngineAndTransmission(res.data.data.engine_and_transmission);
+    new VehicleService()
+      .getDetailedInfo(quotationInfo.codia)
+      .then((res) => {
+        setComfort(res.data.data.comfort);
+        setTechnicalInfo(res.data.data.technical_info);
+        setEngineAndTransmission(res.data.data.engine_and_transmission);
 
-      setSecurity(res.data.data.security);
-      setCarBrand(res.data.data.brand);
-      setCarModel(res.data.data.model);
-      setImageUrl(res.data.data.photo_url);
-    }).finally(() => {
-      setLoading(false);
-    });
+        setSecurity(res.data.data.security);
+        setCarBrand(res.data.data.brand);
+        setCarModel(res.data.data.model);
+        setImageUrl(res.data.data.photo_url);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const descriptionTemplate = (feature) => {
@@ -104,8 +107,10 @@ export function VehicleSpecs({ step, setStep }) {
             isNextPageValid={isNextPageValid}
             title={title}
           />
-          <div className={'mx-3'}>
-            <h3 className={"flex align-items-center justify-content-center my-1"}>
+          <div className={"mx-3"}>
+            <h3
+              className={"flex align-items-center justify-content-center my-1"}
+            >
               {carBrand} {carModel}
             </h3>
             <div className={"grid"}>
@@ -114,44 +119,44 @@ export function VehicleSpecs({ step, setStep }) {
                   <TabPanel header="Comfort">
                     <div className={"grid"}>
                       {comfort !== null ? (
-                          comfort.map((feature) => {
-                            return <>{descriptionTemplate(feature)}</>;
-                          })
+                        comfort.map((feature) => {
+                          return <>{descriptionTemplate(feature)}</>;
+                        })
                       ) : (
-                          <></>
+                        <></>
                       )}
                     </div>
                   </TabPanel>
                   <TabPanel header="Datos técnicos">
                     <div className={"grid"}>
                       {technicalInfo !== null ? (
-                          technicalInfo.map((feature) => {
-                            return <>{descriptionTemplate(feature)}</>;
-                          })
+                        technicalInfo.map((feature) => {
+                          return <>{descriptionTemplate(feature)}</>;
+                        })
                       ) : (
-                          <></>
+                        <></>
                       )}
                     </div>
                   </TabPanel>
                   <TabPanel header="Motor y transmisión">
                     <div className={"grid"}>
                       {engineAndTransmission !== null ? (
-                          engineAndTransmission.map((feature) => {
-                            return <>{descriptionTemplate(feature)}</>;
-                          })
+                        engineAndTransmission.map((feature) => {
+                          return <>{descriptionTemplate(feature)}</>;
+                        })
                       ) : (
-                          <></>
+                        <></>
                       )}
                     </div>
                   </TabPanel>
                   <TabPanel header="Seguridad">
                     <div className={"grid"}>
                       {security !== null ? (
-                          security.map((feature) => {
-                            return <>{descriptionTemplate(feature)}</>;
-                          })
+                        security.map((feature) => {
+                          return <>{descriptionTemplate(feature)}</>;
+                        })
                       ) : (
-                          <></>
+                        <></>
                       )}
                     </div>
                   </TabPanel>
@@ -162,18 +167,30 @@ export function VehicleSpecs({ step, setStep }) {
                   <h4>Imagen de referencia</h4>
                 </div>
                 <div className={"flex justify-content-center"}>
-                  <Image src={imageUrl} downloadable={false} width={'100%'} />
+                  {imageUrl ? (
+                    <>
+                      <Image
+                        src={imageUrl}
+                        downloadable={false}
+                        width={"100%"}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <span>No disponible</span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
           <FormFooter
-              className={'pb-7'}
-              back={() => previousPage()}
-              next={() => nextPage()}
-              isNextPageValid={isNextPageValid}
-              title={title}
+            className={"pb-7"}
+            back={() => previousPage()}
+            next={() => nextPage()}
+            isNextPageValid={isNextPageValid}
+            title={title}
           />
         </>
       )}

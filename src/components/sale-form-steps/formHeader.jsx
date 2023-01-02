@@ -8,7 +8,7 @@ function FormHeader({ next, back, title, isNextPageValid }) {
         <div className="flex-wrap sm:flex align-items-center justify-content-start hidden">
           <Button
             icon="pi pi-angle-left"
-            className="p-button-rounded p-button-sm p-button-danger "
+            className="p-button-rounded p-button-sm p-button-techmo "
             aria-label="Back"
             onClick={() => back()}
             label={"Atrás"}
@@ -20,7 +20,7 @@ function FormHeader({ next, back, title, isNextPageValid }) {
         <div className="flex-wrap sm:flex align-items-center justify-content-end hidden">
           <Button
             icon="pi pi-angle-right"
-            className="p-button-rounded p-button-sm p-button-danger"
+            className="p-button-rounded p-button-sm p-button-techmo"
             aria-label="Next"
             onClick={() => next()}
             disabled={!isNextPageValid}
