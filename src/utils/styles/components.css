@@ -1,8 +1,8 @@
 :root {
-  --font-family: "Raleway", sans-serif;
-  --mah-colour: #e21f25;
-  --primary-color: var(--mah-colour);
-  --font-size: 90%;
+  --font-family: 'Montserrat', sans-serif;
+  --techmo-colour: #28E0CC;
+  --primary-color: var(--techmo-colour);
+  --font-size: 100%;
 }
 
 .p-link {
@@ -17,7 +17,19 @@ body {
 .p-menubar {
   padding: 0;
   border: 0;
+  margin: 5px 50px 5px 50px;
   border-radius: 0;
+  background: white;
+}
+
+.p-menubar-start > img {
+  height: 50px !important;
+  width: auto !important;
+}
+
+.p-menubar-end > img {
+  height: 50px !important;
+  width: auto !important;
 }
 
 .p-menu-item {
@@ -56,12 +68,12 @@ label {
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: #ffffff;
-  border-color: var(--mah-colour);
-  color: var(--mah-colour);
+  border-color: var(--techmo-colour);
+  color: var(--techmo-colour);
 }
 
 .p-tabview .p-tabview-nav .p-tabview-ink-bar {
-  background-color: var(--mah-colour);
+  background-color: var(--techmo-colour);
 }
 
 .card-mah {
@@ -90,17 +102,17 @@ label {
 @keyframes p-progress-spinner-color {
   100%,
   0% {
-    stroke: var(--mah-colour);
+    stroke: var(--techmo-colour);
   }
   40% {
-    stroke: var(--mah-colour);
+    stroke: var(--techmo-colour);
   }
   66% {
-    stroke: var(--mah-colour);
+    stroke: var(--techmo-colour);
   }
   80%,
   90% {
-    stroke: var(--mah-colour);
+    stroke: var(--techmo-colour);
   }
 }
 
@@ -108,20 +120,32 @@ label {
   font-size: 100%;
 }
 
-.red-card-border {
-  box-shadow: 0px 0px 0px 0px rgba(230,36,36,0.4);
-  border: 4px solid #e21f25;
+.green-card-border {
+  box-shadow: 0 0 0 0 #28E0CC65;
+  border: 4px solid var(--teal-800);
   border-radius: 6px;
 }
 
 .p-menuitem-link:hover {
-  background: rgba(249,25,66,.06) !important;
+  background: rgba(40, 224, 204, 0.23) !important;
 }
 
 .p-menuitem-text:hover {
-  color: #f91942 !important;
+  color: var(--techmo-colour) !important;
 }
 
 .p-menu-item {
   color: #495057
+}
+
+.p-button-techmo {
+  color: #ffffff;
+  background: #326f78;
+  border: 1px solid #326f78;
+}
+
+.p-button-techmo:hover {
+  color: #ffffff;
+  background: var(--techmo-colour) !important;
+  border: 1px solid var(--techmo-colour) !important;
 }

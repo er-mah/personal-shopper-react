@@ -5,7 +5,7 @@ import { SellCarContext } from "../../contexts";
 import FormHeader from "./formHeader";
 import FormFooter from "./formFooter";
 import PersonalShopperService from "../../services/personal-shopper.service";
-import { MAH_URLS } from "../../utils/constants/urls";
+import { TECHMO_URLS } from "../../utils/constants/urls";
 
 export function NextSteps({ step, setStep }) {
   let navigate = useNavigate();
@@ -27,7 +27,7 @@ export function NextSteps({ step, setStep }) {
   const nextPage = () => {
     service.addSaleTypeToDeal(saleType, formData.dealId).finally(() => {
       if (selectedOption === 3) {
-        window.location.replace(MAH_URLS.PUBLISH_CAR);
+        window.location.replace(TECHMO_URLS.PUBLISH_CAR);
       }
       navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.FORM_COMPLETE);
     });
@@ -87,8 +87,8 @@ export function NextSteps({ step, setStep }) {
                 <div
                   className={
                     selectedOption === 1
-                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 red-card-border p-3"
-                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 p-3"
+                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 green-card-border p-3"
+                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 p-3"
                   }
                   onClick={() => {
                     setSelectedOption(1);
@@ -129,8 +129,8 @@ export function NextSteps({ step, setStep }) {
                 <div
                   className={
                     selectedOption === 2
-                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 red-card-border p-3"
-                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 p-3"
+                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 green-card-border p-3"
+                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 p-3"
                   }
                   onClick={() => {
                     setSelectedOption(2);
@@ -171,8 +171,8 @@ export function NextSteps({ step, setStep }) {
                 <div
                   className={
                     selectedOption === 3
-                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 red-card-border p-3"
-                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-red-200 p-3"
+                      ? "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 green-card-border p-3"
+                      : "p-card-body p-0 m-0 transition-colors text-900 hover:bg-teal-200 p-3"
                   }
                   onClick={() => {
                     setSelectedOption(3);

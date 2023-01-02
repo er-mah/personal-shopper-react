@@ -1,3 +1,3 @@
 export {VEHICLE_DETAILS_OPTIONS, BRAND_OPTIONS, REVISION_OPTIONS, OWNER_OPTIONS} from "./formOptions";
 export {MAIN_URLS, NEW_SALE_FORM_URLS, CALL_TO_ACTION_URLS} from './urls';
-export {MAH_RED_COLOUR} from './color';
+export {TECHMO_COLOUR} from './color';

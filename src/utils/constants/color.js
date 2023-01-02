@@ -1,1 +1,1 @@
-export const MAH_RED_COLOUR = "#E21F25"
+export const TECHMO_COLOUR = "#28E0CC"

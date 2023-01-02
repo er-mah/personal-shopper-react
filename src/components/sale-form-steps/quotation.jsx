@@ -85,7 +85,7 @@ export function Quotation({ step, setStep }) {
   };
 
   // When component is rendered
-  useEffect( () => {
+  useEffect(() => {
     setLoading(true);
 
     if (quotationInfo.colourCategory == null) {
@@ -124,27 +124,37 @@ export function Quotation({ step, setStep }) {
 
           <div className="px-5">
             <div>
-              <div className="flex align-items-center justify-content-center my-3">
-                <div>
-                  <p className={"sm:text-xl text-center"}>
-                    Si concretás la venta con{" "}
-                    <span className={"text-red-500"}>
-                      <strong>miautohoy.com</strong>
-                    </span>
-                    , te podemos ofrecer el siguiente{" "}
-                    <strong>rango de precios</strong>:
-                  </p>
-                  <h2
-                    className={
-                      "border-round bg-red-100 text-xl sm:text-2xl py-3 mx-3 text-center"
-                    }
-                  >
+              <div
+                className={
+                  "flex align-items-center justify-content-center my-3"
+                }
+              >
+                <p className={"sm:text-xl text-center"}>
+                  Si concretás la venta con{" "}
+                  <span className={"text-teal-500"}>
+                    <strong>TechMo</strong>
+                  </span>
+                  , te podemos ofrecer el siguiente{" "}
+                  <strong>rango de precios</strong>:
+                </p>
+              </div>
+              <div
+                className={
+                  "flex align-items-center justify-content-center my-3"
+                }
+              >
+                <span
+                  className={
+                    "border-round bg-teal-200 text-xl sm:text-2xl py-3 px-6 mx-3 text-center"
+                  }
+                >
+                  <strong>
                     $ {minValue} - $ {maxValue}
-                  </h2>
-                </div>
+                  </strong>
+                </span>
               </div>
 
-              <div className="flex mx-3 align-items-center justify-content-center ">
+              <div className="flex mx-3 align-items-center justify-content-center mt-5">
                 <div className="surface-300 border-round-3xl px-4 align-items-center justify-content-center ">
                   <p className={"sm:text-base mb-0"}>
                     En las concesionarias por tu vehículo te pueden ofrecer:

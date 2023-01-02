@@ -15,7 +15,7 @@ import { SellCarProvider } from "../contexts";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import {
-  MAH_RED_COLOUR,
+  TECHMO_COLOUR,
   MAIN_URLS,
   NEW_SALE_FORM_URLS,
 } from "../utils/constants";
@@ -30,7 +30,7 @@ export function NewSaleForm() {
           className=""
           showValue={false}
           value={(currentStep * 100) / Object.keys(NEW_SALE_FORM_URLS).length}
-          color={MAH_RED_COLOUR}
+          color={TECHMO_COLOUR}
         />
         <div>
           <Routes>
