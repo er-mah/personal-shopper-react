@@ -1,7 +1,7 @@
 import React from "react";
 import { Menubar } from "primereact/menubar";
 import { INSTITUTIONAL } from "../utils/assets/institutional";
-import { MAIN_URLS } from "../utils/constants";
+import {MAIN_URLS, NEW_SALE_FORM_URLS} from "../utils/constants";
 import { HOME, TECHMO_URLS } from "../utils/constants/urls";
 
 export const Header = () => {
@@ -9,7 +9,7 @@ export const Header = () => {
     {
       label: "Inicio",
       command: () => {
-        window.open(TECHMO_URLS.HOME, "_blank").focus();
+        window.open(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.START, "_blank").focus();
       },
     },
     {
@@ -83,7 +83,7 @@ export const Header = () => {
         <img
           alt="logo"
           src={INSTITUTIONAL.LOGO_CON_TEXTO}
-          className="h-3rem mx-5 w-auto hidden lg:flex"
+          className="h-3rem lg:mx-5 w-auto hidden lg:flex"
         ></img>
       </a>
     </>
@@ -94,7 +94,7 @@ export const Header = () => {
       <img
         alt="logo"
         src={INSTITUTIONAL.LOGO_SOLO}
-        className="h-2rem mx-3 w-auto flex lg:hidden"
+        className="h-2rem lg:mx-3 w-auto flex lg:hidden"
       ></img>
     </>
   );
