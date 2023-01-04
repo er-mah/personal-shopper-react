@@ -33,16 +33,16 @@ export function Start({ setStep }) {
         <div className="col-12 md:col-6 p-6 text-center md:text-right flex align-items-center justify-content-start">
           <div className="flex">
             <section>
-              <span className="block text-left text-6xl font-bold mb-1">
+              <span className="block md:text-right sm:text-center text-6xl font-bold mb-1">
                 Vendé tu auto
               </span>
-              <div className="text-6xl text-left text-primary font-bold mb-3">
+              <div className="text-6xl md:text-right sm:text-center text-primary font-bold mb-3">
                 de manera inmediata
               </div>
               <p className="mt-0 mb-4 text-xl line-height-3">
                 Sólo necesitamos que nos dejes tus datos para poder contactarte
               </p>
-              <div className="text-right mt-5">
+              <div className="md:text-right sm:text-center mt-5">
                 <Button
                     label="Iniciar Personal Shopper"
                     type="button"

@@ -88,188 +88,197 @@ export function Owner({ _step, setStep }) {
         title={title}
       />
       <div className={"flex align-items-center justify-content-center"}>
-        <div className="grid grid-nogutter">
-          <div className="col-12 md:col-7 px-5">
-            <div className={"flex align-items-center justify-content-center mb-4"}>
-              <span className="bg-teal-100 px-4 py-3 border-round-2xl mx-5 text-center">⚠️{"   "}Tené en cuenta que el campo "Nombre completo" se llena automáticamente. Además, el campo "DNI" se habilita cuando definís el sexo.</span>
-            </div>
-            <div className="p-fluid grid">
-              {/* SEXO */}
-              <div className="field col-6 my-2">
+      </div>
+
+      <div className="grid grid-nogutter">
+        <div className="col-12 md:col-7 p-3">
+          <div className={"flex align-items-center justify-content-center mb-4"}>
+            <span className="bg-teal-100 px-4 py-3 border-round-2xl text-center">⚠️{"   "}Tené en cuenta que el campo "Nombre completo" se llena automáticamente. Además, el campo "DNI" se habilita cuando definís el sexo.</span>
+          </div>
+          <div className="p-fluid grid">
+            {/* SEXO */}
+            <div className="field col-12 sm:col-6 my-2">
                 <span className="p-float-label">
                   <Dropdown
-                    inputId="sex"
-                    value={sex}
-                    options={OWNER_OPTIONS.dniSex}
-                    onChange={($event) => {
-                      if (dni !== undefined) {
-                        setOwnerName(dni, $event.target.value);
-                      }
+                      inputId="sex"
+                      value={sex}
+                      options={OWNER_OPTIONS.dniSex}
+                      onChange={($event) => {
+                        if (dni !== undefined) {
+                          setOwnerName(dni, $event.target.value);
+                        }
 
-                      setSex($event.target.value);
+                        setSex($event.target.value);
 
-                      if ($event.value === "F") {
-                        setFormData({
-                          ...formData,
-                          ownerSex: "Femenino",
-                        });
-                      } else if ($event.value === "M") {
-                        setFormData({
-                          ...formData,
-                          ownerSex: "Masculino",
-                        });
-                      }
-                    }}
-                    placeholder="Seleccioná el sexo tal cual está en el DNI"
+                        if ($event.value === "F") {
+                          setFormData({
+                            ...formData,
+                            ownerSex: "Femenino",
+                          });
+                        } else if ($event.value === "M") {
+                          setFormData({
+                            ...formData,
+                            ownerSex: "Masculino",
+                          });
+                        }
+                      }}
+                      placeholder="Seleccioná el sexo tal cual está en el DNI"
                   />
                   <label htmlFor="sex">Sexo</label>
                 </span>
-              </div>
+            </div>
 
-              {/* DNI */}
-              <div className="field col-6 my-2">
+            {/* DNI */}
+            <div className="field col-12 sm:col-6 my-2">
                 <span className="p-float-label">
                   {typeof formData.ownerSex === "undefined" ? (
-                    <>
-                      <InputNumber
-                        inputId="dni"
-                        autoComplete={"off"}
-                        value={dni}
-                        onValueChange={($event) => {
-                          setDni($event.value);
-                          setFormData({ ...formData, ownerDni: $event.value });
-                          setOwnerName($event.value, sex);
-                        }}
-                        disabled={true}
-                      />
-                    </>
+                      <>
+                        <InputNumber
+                            inputId="dni"
+                            autoComplete={"off"}
+                            value={dni}
+                            onValueChange={($event) => {
+                              setDni($event.value);
+                              setFormData({ ...formData, ownerDni: $event.value });
+                              setOwnerName($event.value, sex);
+                            }}
+                            disabled={true}
+                        />
+                      </>
                   ) : (
-                    <>
-                      <InputNumber
-                        inputId="dni"
-                        autoComplete={"off"}
-                        value={dni}
-                        onValueChange={($event) => {
-                          setDni($event.value);
-                          setFormData({ ...formData, ownerDni: $event.value });
-                          setOwnerName($event.value, sex);
-                        }}
-                      />
-                    </>
+                      <>
+                        <InputNumber
+                            inputId="dni"
+                            autoComplete={"off"}
+                            value={dni}
+                            onValueChange={($event) => {
+                              setDni($event.value);
+                              setFormData({ ...formData, ownerDni: $event.value });
+                              setOwnerName($event.value, sex);
+                            }}
+                        />
+                      </>
                   )}
 
                   <label htmlFor="dni">DNI</label>
                 </span>
-              </div>
+            </div>
 
-              {/* NOMBRE COMPLETO */}
-              <div className="field col-6 my-2">
+            {/* NOMBRE COMPLETO */}
+            <div className="field col-12 sm:col-6 my-2">
                 <span className="p-float-label">
                   {(formData.ownerDni == null && formData.ownerSex == null) ||
                   !fullName ? (
-                    <>
-                      <InputText
-                        autoComplete={"off"}
-                        id="fullName"
-                        value={fullName}
-                        disabled={true}
-                      />
-                    </>
+                      <>
+                        <InputText
+                            autoComplete={"off"}
+                            id="fullName"
+                            value={fullName}
+                            disabled={true}
+                        />
+                      </>
                   ) : (
-                    <>
-                      <InputText
-                        autoComplete={"off"}
-                        id="fullName"
-                        value={fullName}
-                        readOnly={true}
-                      />
-                    </>
+                      <>
+                        <InputText
+                            autoComplete={"off"}
+                            id="fullName"
+                            value={fullName}
+                            readOnly={true}
+                        />
+                      </>
                   )}
                   <label htmlFor="fullName">Nombre completo</label>
                 </span>
-              </div>
+            </div>
 
-              {/* CORREO ELECTRÓNICO */}
-              <div className="field col-6 my-2">
+            {/* CORREO ELECTRÓNICO */}
+            <div className="field col-12 sm:col-6 my-2">
                 <span className="p-float-label">
                   <InputText
-                    autoComplete={"off"}
-                    id="email"
-                    type={"email"}
-                    value={email}
-                    onChange={($event) => {
-                      setEmail($event.target.value);
-                      setFormData({
-                        ...formData,
-                        ownerEmail: $event.target.value,
-                      });
-                    }}
-                    placeholder="Escribí el correo electrónico"
+                      autoComplete={"off"}
+                      id="email"
+                      type={"email"}
+                      value={email}
+                      onChange={($event) => {
+                        setEmail($event.target.value);
+                        setFormData({
+                          ...formData,
+                          ownerEmail: $event.target.value,
+                        });
+                      }}
+                      placeholder="Escribí el correo electrónico"
                   />
                   <label htmlFor="email">Correo electrónico</label>
                 </span>
-              </div>
+            </div>
 
-              {/* TELÉFONO */}
-              <div className="field col-6 my-2">
+            {/* TELÉFONO */}
+            <div className="field col-12 sm:col-6 my-2">
                 <span className="p-float-label">
                   <InputNumber
-                    inputId="tel"
-                    autoComplete={"off"}
-                    value={telephone}
-                    mode="decimal"
-                    useGrouping={false}
-                    prefix={"+54 "}
-                    onValueChange={($event) => {
-                      setTelephone($event.value);
-                      setFormData({
-                        ...formData,
-                        ownerTelephone: $event.value,
-                      });
-                    }}
-                    placeholder={"Escribi el teléfono de contacto"}
+                      inputId="tel"
+                      autoComplete={"off"}
+                      value={telephone}
+                      mode="decimal"
+                      useGrouping={false}
+                      prefix={"+54 "}
+                      onValueChange={($event) => {
+                        setTelephone($event.value);
+                        setFormData({
+                          ...formData,
+                          ownerTelephone: $event.value,
+                        });
+                      }}
+                      placeholder={"Escribi el teléfono de contacto"}
                   />
 
                   <label htmlFor="tel">Teléfono</label>
                 </span>
-              </div>
+            </div>
 
-              {/* POSTAL CODE */}
-              <div className="field col-6 my-2 ">
+            {/* POSTAL CODE */}
+            <div className="field col-12 sm:col-6 my-2 ">
                 <span className="p-float-label">
                   <InputText
-                    autoComplete={"off"}
-                    id="address"
-                    value={postalCode}
-                    onChange={($event) => {
-                      setPostalCode($event.target.value);
-                      setFormData({
-                        ...formData,
-                        ownerPostalCode: $event.target.value,
-                      });
-                    }}
-                    placeholder="Definí el código postal"
+                      autoComplete={"off"}
+                      id="address"
+                      value={postalCode}
+                      onChange={($event) => {
+                        setPostalCode($event.target.value);
+                        setFormData({
+                          ...formData,
+                          ownerPostalCode: $event.target.value,
+                        });
+                      }}
+                      placeholder="Definí el código postal"
                   />
                   <label htmlFor="address">Código postal</label>
                 </span>
-              </div>
             </div>
-          </div>
 
-          <div className="col-12 md:col-5 overflow-hidden">
-            <div className="flex align-content-end justify-content-end md:ml-auto block md:h-full">
-              <img
+          </div>
+          <div className="col-12 overflow-hidden">
+            <FormFooter
+                back={() => previousPage()}
+                next={() => nextPage()}
+                isNextPageValid={isNextPageValid}
+                title={title}
+            />
+          </div>
+        </div>
+
+        <div className="col-12 md:col-5 overflow-hidden">
+          <div className="flex align-content-end justify-content-end">
+            <img
                 src={INSTITUTIONAL.OWNER}
                 alt="hero-1"
                 style={{
                   width: "100%",
                 }}
-              />
-            </div>
+            />
           </div>
         </div>
       </div>
-
 
     </div>
   );
