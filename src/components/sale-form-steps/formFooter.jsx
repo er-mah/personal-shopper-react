@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 function FormHeader({ next, back, isNextPageValid }) {
   return (
     <>
-      <div className="flex m-3">
+      <div className="flex my-2">
         <div className="flex-1 flex align-items-center justify-content-end sm:hidden mr-2">
           <Button
             icon="pi pi-angle-left"

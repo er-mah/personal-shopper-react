@@ -102,7 +102,7 @@ export const Header = () => {
   return (
     <>
       <Menubar
-        className="py-3 align-items-center justify-content-center menubar"
+        className="lg:py-3 align-items-center justify-content-center menubar"
         model={items}
         start={start}
         end={end}
