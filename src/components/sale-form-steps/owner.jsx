@@ -91,9 +91,9 @@ export function Owner({ _step, setStep }) {
       </div>
 
       <div className="grid grid-nogutter">
-        <div className="col-12 md:col-7 p-3">
+        <div className="col-12 md:col-7 px-3">
           <div className={"flex align-items-center justify-content-center mb-4"}>
-            <span className="bg-teal-100 px-4 py-3 border-round-2xl text-center">⚠️{"   "}Tené en cuenta que el campo "Nombre completo" se llena automáticamente. Además, el campo "DNI" se habilita cuando definís el sexo.</span>
+            <span className="bg-teal-100 px-4 py-3 border-round-2xl text-center">⚠️{"   "}Tené en cuenta que el campo "DNI" se habilita cuando definís el sexo. Además, el campo "Nombre completo" se llena automáticamente.</span>
           </div>
           <div className="p-fluid grid">
             {/* SEXO */}
@@ -257,7 +257,7 @@ export function Owner({ _step, setStep }) {
             </div>
 
           </div>
-          <div className="col-12 overflow-hidden">
+          <div className="col-12 sm:hidden">
             <FormFooter
                 back={() => previousPage()}
                 next={() => nextPage()}
