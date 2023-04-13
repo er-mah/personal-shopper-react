@@ -9,6 +9,7 @@
     "axios": "^0.27.2",
     "firebase": "^9.9.0",
     "formik": "^2.2.9",
+    "prettier": "^2.8.7",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
     "primereact": "^8.2.0",
@@ -47,7 +48,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
-    "postcss": "^8.4.14",
-    "prettier": "^2.7.1"
+    "postcss": "^8.4.14"
   }
 }
