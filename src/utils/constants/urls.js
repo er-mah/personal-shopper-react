@@ -24,7 +24,7 @@ export const CALL_TO_ACTION_URLS = {
   COMMUNICATION_CHANNEL: HOME + "/faq",
   CAR_INSURANCES: HOME + "#seguros",
   BLOG_POSTS: ARG + "/usados/blog",
-  WHATSAPP_CONTACT_URL: "https://api.whatsapp.com/send?phone=542604222645",
+  WHATSAPP_CONTACT_URL: "https://api.whatsapp.com/send/?phone=5492613424101&text=Hola,%20no%20pude%20encontrar%20mi%20vehiculo%20en%20el%20cotizador.%20Me%20gustar%C3%ADa%20obtener%20mas%20informacion&type=phone_number&app_absent=0",
 };
 
 export const TECHMO_URLS = {

@@ -40,49 +40,55 @@ export function Quotation({ step, setStep }) {
     navigate(MAIN_URLS.NEW_SALE_FORM + NEW_SALE_FORM_URLS.REVISION);
   };
 
-  const storeInfo = async (payload) => {
+  const storeInfo = (payload) => {
     vecicleService.getQuotation(payload).then((res) => {
       setMinValue(res.data.data.minValue);
       setMaxValue(res.data.data.maxValue);
       setOtherPrices(res.data.data.agenciesPrices);
       setBaseValue((res.data.data.minValue + res.data.data.maxValue) / 2);
-      setTimeout(
-          () => {
-              personalShopperService
-                  .persistDeal({
-                      ownerCuil: formData.ownerCuil,
-                      ownerDni: formData.ownerDni,
-                      ownerEmail: formData.ownerEmail,
-                      ownerName: formData.ownerName,
-                      ownerPhone: formData.ownerTelephone,
-                      ownerPostalCode: formData.ownerPostalCode,
-                      ownerSex: formData.ownerSex,
-                      saleBaseQuotationValue:
-                          (res.data.data.minValue + res.data.data.maxValue) / 2,
-                      saleCurrency: formData.currency,
-                      saleQuotationRange:
-                          res.data.data.minValue + " - " + res.data.data.maxValue,
-                      saleRequestedAmount: formData.amount,
-                      saleUrgency: formData.urgency,
-                      vehicleBrand: formData.brandName,
-                      vehicleColor: formData.colour,
-                      vehicleComments: formData.comments,
-                      vehicleKilometers: formData.kilometers,
-                      vehicleLicensePlate: formData.licensePlate,
-                      vehicleModel: formData.modelName,
-                      vehicleState: formData.state,
-                      vehicleVersion: formData.versionName,
-                      vehicleYear: formData.year,
-                  })
-                  .then((res) => {
-                      setFormData({ ...formData, dealId: res.data.data.id });
-                  })
-                  .finally(() => {
-                      setLoading(false);
-                  });
-          },
-        5000
-      );
+
+      // If exists a deal, delete it to create a new one
+      if (formData.dealId) {
+        personalShopperService.deleteDeal(formData.dealId).then((res) => {
+          setFormData({ ...formData, dealId: "" });
+        });
+      }
+
+      personalShopperService
+        .persistDeal({
+          ownerCuil: formData.ownerCuil,
+          ownerDni: formData.ownerDni,
+          ownerEmail: formData.ownerEmail,
+          ownerName: formData.ownerName,
+          ownerPhone: formData.ownerTelephone,
+          ownerPostalCode: formData.ownerPostalCode,
+          ownerSex: formData.ownerSex,
+          saleBaseQuotationValue:
+            (res.data.data.minValue + res.data.data.maxValue) / 2,
+          saleCurrency: formData.currency,
+          saleQuotationRange:
+            res.data.data.minValue + " - " + res.data.data.maxValue,
+          saleRequestedAmount: formData.amount,
+          saleUrgency: formData.urgency,
+          vehicleBrand: formData.brandName,
+          vehicleColor: formData.colour,
+          vehicleComments: formData.comments,
+          vehicleKilometers: formData.kilometers,
+          vehicleLicensePlate: formData.licensePlate,
+          vehicleModel: formData.modelName,
+          vehicleState: formData.state,
+          vehicleVersion: formData.versionName,
+          vehicleYear: formData.year,
+        })
+        .then(async (res) => {
+          await setFormData({
+            ...formData,
+            dealId: res.data.data.id,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     });
   };
 

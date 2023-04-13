@@ -3,7 +3,7 @@ import axios from "axios";
 function VecicleService() {
   this.getBrands = async () => {
     try {
-      return axios.get(`${process.env.REACT_APP_MAH_URI}/vehicle/brands`);
+      return axios.get(`${process.env.REACT_APP_TECHMO_API_URI}/vehicle/brands`);
     } catch (err) {
       console.error(err);
     }
@@ -14,7 +14,7 @@ function VecicleService() {
   this.getYears = (brandId) => {
     try {
       return axios.get(
-          `${process.env.REACT_APP_MAH_URI}/vehicle/years?brandId=${brandId}`
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/years?brandId=${brandId}`
       );
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ function VecicleService() {
   this.getModels = async (brandId, year) => {
     try {
       return axios.get(
-          `${process.env.REACT_APP_MAH_URI}/vehicle/models?brandId=${brandId}&year=${year}`
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/models?brandId=${brandId}&year=${year}`
       );
     } catch (err) {
       console.error(err);
@@ -37,7 +37,7 @@ function VecicleService() {
   this.getVersions = async (brandId, year, modelId) => {
     try {
       return axios.get(
-          `${process.env.REACT_APP_MAH_URI}/vehicle/versions?brandId=${brandId}&year=${year}&modelId=${modelId}`
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/versions?brandId=${brandId}&year=${year}&modelId=${modelId}`
       );
     } catch (err) {
       console.error(err);
@@ -49,7 +49,7 @@ function VecicleService() {
   this.getDetailedInfo = async (versionId) => {
     try {
       return axios.get(
-          `${process.env.REACT_APP_MAH_URI}/vehicle/${versionId}/details`
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/${versionId}/details`
       );
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ function VecicleService() {
   this.getQuotation = async (payload) => {
     try {
       return await axios.post(
-          `${process.env.REACT_APP_MAH_URI}/vehicle/price`,
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/price`,
           payload
       );
     } catch (err) {
