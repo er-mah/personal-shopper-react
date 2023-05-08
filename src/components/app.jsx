@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./header";
 import { NewSaleForm } from "./newSaleForm";
 import { MAIN_URLS, NEW_SALE_FORM_URLS } from "../utils/constants";
+import {BasePrice} from "./base-price/basePrice";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
         <Route
           path={MAIN_URLS.NEW_SALE_FORM + "/*"}
           element={<NewSaleForm />}
+        />
+        <Route
+          path={"/precio-base"}
+          element={<BasePrice />}
         />
       </Routes>
     </div>
