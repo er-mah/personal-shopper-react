@@ -21,7 +21,7 @@ export const BasePrice = () => {
   const [mainBrands, setMainBrands] = useState(BRAND_OPTIONS.mainBrands);
 
   // Persist data from api
-  const [brandsFromApi, setBrandsFromApi] = useState([]);
+  const [brandsFromApi, setBrandsFromApi] = useState(null);
   const [yearsFromApi, setYearsFromApi] = useState([]);
   const [modelsFromApi, setModelsFromApi] = useState([]);
   const [versionsFromApi, setVersionsFromApi] = useState([]);
@@ -89,7 +89,7 @@ export const BasePrice = () => {
         console.error(error);
       }
     };
-    if (brandsFromApi.length === 0) {
+    if (!brandsFromApi) {
       getBrands();
     }
   });
