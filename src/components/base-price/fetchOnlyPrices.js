@@ -1,5 +1,6 @@
 import { useState } from "react";
 import VehicleService from "../../services/vehicle.service";
+import {Button} from "primereact/button";
 
 export const FetchInfoAutoPrices = ({ codia }) => {
   let vehicleService = new VehicleService();
@@ -19,9 +20,12 @@ export const FetchInfoAutoPrices = ({ codia }) => {
     } else {
       response = await vehicleService.getBasePrices("used-vehicle", codia);
     }
-    console.log(response.data.data);
 
-    setBasePrices(response.data.data);
+    console.log(response);
+
+    if (response) {
+      setBasePrices(response.data.data);
+    }
   };
 
   return (
@@ -40,12 +44,7 @@ export const FetchInfoAutoPrices = ({ codia }) => {
           </label>
         </div>
         <div className="field col-6 sm:col-3 ">
-          <button
-            onClick={handleButtonClick}
-            className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
-          >
-            Obtener datos
-          </button>
+          <Button onClick={handleButtonClick}>Obtener datos</Button>
         </div>
 
         <div className="field col-12 sm:col-6 ">
@@ -74,7 +73,13 @@ export const FetchInfoAutoPrices = ({ codia }) => {
           )}
           {!usedVehicle && basePrices ? (
             <>
-              <h3>Precio OKM: $ {basePrices[0].list_price}</h3>
+              {basePrices[0] ? (
+                <>
+                  <h3>Precio OKM: $ {basePrices[0].list_price}</h3>
+                </>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <></>
