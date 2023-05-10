@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function VecicleService() {
+function VehicleService() {
   this.getBrands = async () => {
     try {
       return axios.get(`${process.env.REACT_APP_TECHMO_API_URI}/vehicle/brands`);
@@ -66,6 +66,19 @@ function VecicleService() {
       console.error(err);
     }
   };
+
+
+
+  this.getBasePrices = async (vehicleType, codia) => {
+    try {
+      return await axios.get(
+          `${process.env.REACT_APP_TECHMO_API_URI}/vehicle/prices/${vehicleType}/${codia}/details`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 }
 
-export default VecicleService;
+export default VehicleService;

@@ -12,6 +12,7 @@ import {
 } from "../../utils/constants";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
+import { FetchInfoAutoPrices } from "./fetchOnlyPrices";
 
 export const BasePrice = () => {
   let vehicleService = new VehicleService();
@@ -272,7 +273,18 @@ export const BasePrice = () => {
             </span>
           </div>
         </div>
-        <div className="p-fluid grid mx-3">
+
+        {selectedVersion ? (
+          <FetchInfoAutoPrices codia={selectedVersion} />
+        ) : (
+          <></>
+        )}
+
+
+
+
+
+        <div className="p-fluid grid mt-8 mx-3">
           {/* Colour */}
           <div className="field col-6 md:col-3">
             <span className="p-float-label">
